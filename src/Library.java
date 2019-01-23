@@ -22,6 +22,11 @@ public class Library {
 		suma = new ComplexNumber(sumaR,sumaI);
 	}
 	
+	/**
+	 * 
+	 * @param num1
+	 * @param num2
+	 */
 	public void producto(ComplexNumber num1, ComplexNumber num2) {
 		int multR = (num1.getPartR()*num2.getPartR())+(-1*(num1.getPartI()*num2.getPartI()));
 		int multI = (num1.getPartR()*num2.getPartI())+(num1.getPartI()*num2.getPartR());
