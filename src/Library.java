@@ -1,5 +1,9 @@
 
-
+/**
+ * 
+ * @author 2115253
+ *
+ */
 public class Library {
 	private ComplexNumber suma,producto,resta,division;
 	
