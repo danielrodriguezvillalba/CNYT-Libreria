@@ -1,3 +1,4 @@
+package java;
 
 public class ComplexNumber {
 	private double parteR, parteI, modulo, fase;
@@ -41,6 +42,7 @@ public class ComplexNumber {
 			return fase;
 		}
 		else {
+			fase = parteR;
 			return fase;
 		}
 	}

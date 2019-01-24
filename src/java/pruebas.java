@@ -1,3 +1,4 @@
+package java;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
@@ -81,9 +82,9 @@ class pruebas {
 		double[] num1 = {Math.pow(2, 0.5),Math.atan(1)};
 		int[] num2 = {1,2};
 		ComplexNumber num = new ComplexNumber(num1[0],num1[1]);
-		Library lb = new Library(num2,num2) ;
 		num.cambiarForma('P');
-		lb.cambiarForma(num);
+		Library lb = new Library(num2,num2) ;
+		lb.cambiarForma(num);	
 		assertEquals(1,num.getPartR());
 		assertEquals(1,num.getPartI());
 	}
@@ -97,6 +98,7 @@ class pruebas {
 	public void deberiaDarFaseDeUnNumeroPolares() {
 		int[] num1 = {60,1};
 		ComplexNumber num = new ComplexNumber(num1[0],num1[1]);
+		num.cambiarForma('P');
 		assertEquals(60,num.fase());
 	}
 }
