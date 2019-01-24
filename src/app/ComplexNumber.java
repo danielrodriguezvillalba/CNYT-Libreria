@@ -1,4 +1,4 @@
-package java;
+package app;
 
 public class ComplexNumber {
 	private double parteR, parteI, modulo, fase;
