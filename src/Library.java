@@ -1,9 +1,5 @@
 
-/**
- * 
- * @author 2115253
- *
- */
+
 public class Library {
 	private ComplexNumber suma,producto,resta,division;
 	
@@ -17,32 +13,27 @@ public class Library {
 	}
 	
 	public void suma(ComplexNumber num1, ComplexNumber num2) {
-		int sumaR = num1.getPartR()+num2.getPartR();
-		int sumaI = num1.getPartI()+num2.getPartI();
+		double sumaR = num1.getPartR()+num2.getPartR();
+		double sumaI = num1.getPartI()+num2.getPartI();
 		suma = new ComplexNumber(sumaR,sumaI);
 	}
 	
-	/**
-	 * 
-	 * @param num1
-	 * @param num2
-	 */
 	public void producto(ComplexNumber num1, ComplexNumber num2) {
-		int multR = (num1.getPartR()*num2.getPartR())+(-1*(num1.getPartI()*num2.getPartI()));
-		int multI = (num1.getPartR()*num2.getPartI())+(num1.getPartI()*num2.getPartR());
+		double multR = (num1.getPartR()*num2.getPartR())+(-1*(num1.getPartI()*num2.getPartI()));
+		double multI = (num1.getPartR()*num2.getPartI())+(num1.getPartI()*num2.getPartR());
 		producto = new ComplexNumber(multR,multI);
 	}
 	
 	public void resta(ComplexNumber num1, ComplexNumber num2){
-		int restaR = num1.getPartR()-num2.getPartR();
-		int restaI = num1.getPartI()-num2.getPartI();
+		double restaR = num1.getPartR()-num2.getPartR();
+		double restaI = num1.getPartI()-num2.getPartI();
 		resta = new ComplexNumber(restaR,restaI);
 	}
 	
 	public void division(ComplexNumber num1, ComplexNumber num2) {
-		int divisor = (int) (Math.pow(num1.getPartI(), 2)+  Math.pow(num2.getPartI(), 2));
-		int mult1 = num1.getPartR()*num1.getPartI() + num2.getPartR()*num2.getPartI();
-		int mult2 = num1.getPartI()*num2.getPartR() - num1.getPartR()*num2.getPartI();
+		double divisor =Math.pow(num1.getPartI(), 2)+  Math.pow(num2.getPartI(), 2);
+		double mult1 = num1.getPartR()*num1.getPartI() + num2.getPartR()*num2.getPartI();
+		double mult2 = num1.getPartI()*num2.getPartR() - num1.getPartR()*num2.getPartI();
 		division = new ComplexNumber((mult1/divisor),(mult2/divisor));
 	}
 	
@@ -52,6 +43,23 @@ public class Library {
 	
 	public double modulo(ComplexNumber num) {
 		return num.modulo();
+	}
+	
+	public void cambiarForma(ComplexNumber num) {
+		if (num.getForma() == ('C')){
+			double temp1 = Math.pow(Math.pow(num.getPartI(), 2) + Math.pow(num.getPartR(), 2),0.5);
+			double temp2 = Math.atan(num.getPartI()/num.getPartR());
+			num.setPartR(temp1);
+			num.setPartI(temp2);
+			num.cambiarForma('P');
+		}
+		else {
+			double temp1 = num.getPartR()* Math.cos(num.getPartI());
+			double temp2 = num.getPartR()* Math.sin(num.getPartI());
+			num.setPartR(temp1);
+			num.setPartI(temp2);
+			num.cambiarForma('C');
+		}
 	}
 	
 	public ComplexNumber conjugado(ComplexNumber num) {
@@ -67,7 +75,6 @@ public class Library {
 		return division;
 	}
 	public ComplexNumber demeProducto() {
-		//int[] res = {suma.getPartR(),suma.getPartI()};
 		return producto;
 	}
 	

@@ -65,4 +65,26 @@ class pruebas {
 		assertEquals(1,con.getPartR());
 		assertEquals(1,con.getPartI());
 	}
+	
+	@Test
+	public void deberiaCambiarLasCoordenadasAPolares() {
+		int[] num1 = {1,1};
+		int[] num2 = {1,2};
+		ComplexNumber num = new ComplexNumber(num1[0],num1[1]);
+		Library lb = new Library(num1,num2) ;
+		lb.cambiarForma(num);
+		assertEquals(Math.pow(2, 0.5),num.getPartR());
+		assertEquals(Math.atan(1),num.getPartI());
+	}
+	
+	public void deberiaCambiarLasCoordenadasACardinales() {
+		double[] num1 = {Math.pow(2, 0.5),Math.atan(1)};
+		int[] num2 = {1,2};
+		ComplexNumber num = new ComplexNumber(num1[0],num1[1]);
+		Library lb = new Library(num2,num2) ;
+		num.cambiarForma('P');
+		lb.cambiarForma(num);
+		assertEquals(1,num.getPartR());
+		assertEquals(1,num.getPartI());
+	}
 }
