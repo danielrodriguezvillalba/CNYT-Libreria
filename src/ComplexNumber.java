@@ -1,6 +1,6 @@
 
 public class ComplexNumber {
-	private double parteR, parteI, modulo;
+	private double parteR, parteI, modulo, fase;
 	private char forma;
 	public ComplexNumber (double r , double i) {
 		parteR = r;
@@ -34,5 +34,14 @@ public class ComplexNumber {
 	}
 	public double modulo() {
 		return modulo;
+	}
+	public double fase() {
+		if(forma == 'C') {
+			fase = Math.atan(parteI/parteR);
+			return fase;
+		}
+		else {
+			return fase;
+		}
 	}
 }

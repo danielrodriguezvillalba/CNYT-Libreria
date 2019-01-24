@@ -87,4 +87,12 @@ class pruebas {
 		assertEquals(1,num.getPartR());
 		assertEquals(1,num.getPartI());
 	}
+	
+	public void deberiaDarFaseDeUnNumero() {
+		int[] num1 = {1,1};
+		int[] num2 = {1,2};
+		ComplexNumber num = new ComplexNumber(num1[0],num1[1]);
+		Library lb = new Library(num2,num2) ;
+		assertEquals(Math.atan(1),num.fase());
+	}
 }
