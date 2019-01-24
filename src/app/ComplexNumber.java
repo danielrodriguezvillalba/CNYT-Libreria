@@ -10,32 +10,66 @@ public class ComplexNumber {
 		forma = 'C';
 	}
 	
+	/**
+	 * Metodo que retorna la parte real del numero
+	 * @return double que muestra la parte real del numero
+	 */
 	public double getPartR() {
 		return parteR;
 	}
 	
+	/**
+	 * Metodo que retorna la parte imaginaria del numero
+	 * @return double que muestra la parte imaginaria del numero
+	 */
 	public double getPartI() {
 		return parteI;
 	}
 	
+	/**
+	 * Metodo que retorna la forma del numero
+	 * @return double que muestra la forma del numero
+	 */
 	public char getForma() {
 		return forma;
 	}
 	
+	/**
+	 * Metodo que cambia la parte imaginaria del numero
+	 * @param a double por el cual se va a cambiar la parte imaginaria
+	 */
 	public void setPartI(double a) {
 		parteI = a;
 	}
 	
+	/**
+	 * Metodo que cambia la parte real del numero
+	 * @param a double por el cual se va a cambiar la parte real
+	 */
 	public void setPartR(double a) {
 		parteR = a;
 	}
 	
+	/**
+	 * Metodo que cambia la forma del numero
+	 * @param form forma por la cual se va a cambiar el numero 
+	 */
 	public void cambiarForma(char form) {
 		forma = form;
 	}
+	
+	/**
+	 * Metodo que retorna el modulo del numero
+	 * @return modulo double el cual dice el modulo del numero
+	 */
 	public double modulo() {
 		return modulo;
 	}
+	
+	/**
+	 * Metodo que retorna la fase del numero
+	 * @return fase double fase del numero
+	 */
 	public double fase() {
 		if(forma == 'C') {
 			fase = Math.atan(parteI/parteR);
