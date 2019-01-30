@@ -81,4 +81,19 @@ public class ComplexNumber {
 		}
 	}
 	
+	/**
+	 * Metodo que compara si dos numeros complejos son iguales
+	 * @param c Numero Complejo el cual se va a comparar
+	 * @return Boolean que dice si el numero es igual al dado
+	 */
+	public boolean equals(ComplexNumber c) {
+		if(c.getPartR() == parteR && c.getPartI() == parteI) {
+			return true;
+		}
+		else {
+			return false;
+		}
+		
+	}
+	
 }
