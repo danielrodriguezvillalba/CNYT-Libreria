@@ -10,11 +10,12 @@ public class Library {
 	 * Metodo que suma dos numeros complejos
 	 * @param num1 numero 1 el cual se va a sumar
 	 * @param num2 numero 2 el cual se va a sumar
+	 * @return ComplexNumber resultante
 	 */
 	public static ComplexNumber suma(ComplexNumber num1, ComplexNumber num2) {
 		double sumaR = num1.getPartR()+num2.getPartR();
 		double sumaI = num1.getPartI()+num2.getPartI();
-		ComplexNumber suma = new ComplexNumber(sumaR,sumaI);
+		ComplexNumber suma = new ComplexNumber(sumaR,sumaI,'C');
 		return suma;
 	}
 	
@@ -22,11 +23,12 @@ public class Library {
 	 * Metodo que realiza el producto de dos complejos
 	 * @param num1 numero 1 el cual se va a multiplicar
 	 * @param num2 numero 2 el cual se va a multiplicar
+	 * @return ComplexNumber resultante
 	 */
 	public static ComplexNumber producto(ComplexNumber num1, ComplexNumber num2) {
 		double multR = (num1.getPartR()*num2.getPartR())+(-1*(num1.getPartI()*num2.getPartI()));
 		double multI = (num1.getPartR()*num2.getPartI())+(num1.getPartI()*num2.getPartR());
-		ComplexNumber producto = new ComplexNumber(multR,multI);
+		ComplexNumber producto = new ComplexNumber(multR,multI,'C');
 		return producto;
 	}
 	
@@ -34,12 +36,12 @@ public class Library {
 	 * Metodo que realiza la resta de dos complejos
 	 * @param num1 numero 1 el cual se va a restar
 	 * @param num2	numero 2 el cual se va a restar
-	 * @return 
+	 *  @return ComplexNumber resultante
 	 */
 	public static ComplexNumber resta(ComplexNumber num1, ComplexNumber num2){
 		double restaR = num1.getPartR()-num2.getPartR();
 		double restaI = num1.getPartI()-num2.getPartI();
-		ComplexNumber resta = new ComplexNumber(restaR,restaI);
+		ComplexNumber resta = new ComplexNumber(restaR,restaI,'C');
 		return resta;
 	}
 	
@@ -47,12 +49,13 @@ public class Library {
 	 * Metodo que realiza la division de dos complejos
 	 * @param num1 numero 1 el cual se va a dividir
 	 * @param num2 numero 2 por el cual se va a dividir
+	 * @return ComplexNumber resultante
 	 */
 	public static ComplexNumber division(ComplexNumber num1, ComplexNumber num2) {
 		double divisor =Math.pow(num1.getPartI(), 2)+  Math.pow(num2.getPartI(), 2);
 		double mult1 = num1.getPartR()*num1.getPartI() + num2.getPartR()*num2.getPartI();
 		double mult2 = num1.getPartI()*num2.getPartR() - num1.getPartR()*num2.getPartI();
-		ComplexNumber division = new ComplexNumber((mult1/divisor),(mult2/divisor));
+		ComplexNumber division = new ComplexNumber((mult1/divisor),(mult2/divisor),'C');
 		return division;
 	}
 	
@@ -128,7 +131,7 @@ public class Library {
 	 * @return Numero complejo resultante del inverso del complejo dado
 	 */
 	private static ComplexNumber inverso(ComplexNumber c) {
-		ComplexNumber inverso = new ComplexNumber(c.getPartR()*-1,c.getPartI()*-1);
+		ComplexNumber inverso = new ComplexNumber(c.getPartR()*-1,c.getPartI()*-1,'C');
 		return inverso;
 	}
 	
@@ -138,7 +141,24 @@ public class Library {
 	 * @return numero conjugado del numero dado
 	 */
 	public static ComplexNumber conjugado(ComplexNumber num) {
-		ComplexNumber c = new ComplexNumber(num.getPartR(),num.getPartI()*-1);
+		ComplexNumber c = new ComplexNumber(num.getPartR(),num.getPartI()*-1,'C');
 		return c;
-	}	
+	}
+	/**
+	 * Metodo que hace el producto escalar entre un vector y un numero complejo
+	 * @param vector Vector por el cual se va a multiplicar el escalar
+	 * @param num Numero complejo por el cual se va a multiplicar el vector
+	 * @return vector resultante de la multiplicacion escalar
+	 */
+	public static ComplexNumber[] productoEscalar(ComplexNumber[] vector, ComplexNumber num) {
+		if(vector.length > 0) {
+			ComplexNumber[] resultado = new ComplexNumber [vector.length];
+			for (int c = 0; c<vector.length ; c++) {
+				ComplexNumber prod = producto(vector[c], num);
+				resultado[c] = prod;
+			}
+			return resultado;
+		}
+		else {return null;}
+	}
 }

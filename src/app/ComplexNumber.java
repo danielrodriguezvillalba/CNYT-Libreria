@@ -3,11 +3,11 @@ package app;
 public class ComplexNumber {
 	private double parteR, parteI, modulo, fase;
 	private char forma;
-	public ComplexNumber (double r , double i) {
+	public ComplexNumber (double r , double i, char forma) {
 		parteR = r;
 		parteI = i;
 		modulo = Math.pow(Math.pow(parteI, 2) + Math.pow(parteR, 2),0.5);
-		forma = 'C';
+		this.forma = forma;
 	}
 	
 	/**
