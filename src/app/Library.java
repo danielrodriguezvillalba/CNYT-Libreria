@@ -94,12 +94,14 @@ public class Library {
 	 * @param vector2 Vector 2 a ser sumado
 	 * @return vector resultante de la suma de dos vectores dados
 	 */
-	public static ComplexNumber[] sumaVectores(ComplexNumber[] vector1 ,ComplexNumber[] vector2 ) {
-		if(vector1.length == vector2.length) {
-			ComplexNumber[] resultado = new ComplexNumber [vector1.length];
-			for (int c = 0; c<vector1.length ; c++) {
-				ComplexNumber sum = suma(vector1[c],vector2[c]);
-				resultado[c] = sum;
+	public static ComplexNumber[][] sumaMatrices(ComplexNumber[][] matr1 ,ComplexNumber[][] matr2 ) {
+		if(matr1.length == matr2.length && matr1[0].length == matr2[0].length ) {
+			ComplexNumber[][] resultado = new ComplexNumber [matr1.length][matr1[0].length];
+			for (int c = 0; c<matr1.length ; c++) {
+				for (int f = 0; f<matr1[c].length ; f++) {
+					ComplexNumber sum = suma(matr1[c][f],matr2[c][f]);
+					resultado[c][f] = sum;
+				}
 			}
 			return resultado;
 		}
@@ -112,12 +114,14 @@ public class Library {
 	 * @param vector Vector de complejos el cual se va a sacar el inverso
 	 * @return Vector inverso del vector dado
 	 */
-	public static ComplexNumber[] inverso(ComplexNumber[] vector) {
+	public static ComplexNumber[][] inverso(ComplexNumber[][] vector) {
 		if(vector.length > 0) {
-			ComplexNumber[] resultado = new ComplexNumber [vector.length];
+			ComplexNumber[][] resultado = new ComplexNumber [vector.length][vector[0].length];
 			for (int c = 0; c<vector.length ; c++) {
-				ComplexNumber inv = inverso(vector[c]);
-				resultado[c] = inv;
+				for (int f = 0; f<vector[0].length ; f++) {
+					ComplexNumber inv = inverso(vector[c][f]);
+					resultado[c][f] = inv;
+				}
 			}
 			return resultado;
 		}
@@ -131,7 +135,7 @@ public class Library {
 	 * @return Numero complejo resultante del inverso del complejo dado
 	 */
 	private static ComplexNumber inverso(ComplexNumber c) {
-		ComplexNumber inverso = new ComplexNumber(c.getPartR()*-1,c.getPartI()*-1,'C');
+		ComplexNumber inverso = new ComplexNumber(c.getPartR()*-1,c.getPartI()*-1,c.getForma());
 		return inverso;
 	}
 	
@@ -141,7 +145,7 @@ public class Library {
 	 * @return numero conjugado del numero dado
 	 */
 	public static ComplexNumber conjugado(ComplexNumber num) {
-		ComplexNumber c = new ComplexNumber(num.getPartR(),num.getPartI()*-1,'C');
+		ComplexNumber c = new ComplexNumber(num.getPartR(),num.getPartI()*-1,num.getForma());
 		return c;
 	}
 	/**
@@ -150,15 +154,33 @@ public class Library {
 	 * @param num Numero complejo por el cual se va a multiplicar el vector
 	 * @return vector resultante de la multiplicacion escalar
 	 */
-	public static ComplexNumber[] productoEscalar(ComplexNumber[] vector, ComplexNumber num) {
+	public static ComplexNumber[][] productoEscalar(ComplexNumber[][] vector, ComplexNumber num) {
 		if(vector.length > 0) {
-			ComplexNumber[] resultado = new ComplexNumber [vector.length];
+			ComplexNumber[][] resultado = new ComplexNumber [vector.length][vector[0].length];
 			for (int c = 0; c<vector.length ; c++) {
-				ComplexNumber prod = producto(vector[c], num);
-				resultado[c] = prod;
+				for (int f = 0; f<vector[0].length ; f++) {
+					ComplexNumber prod = producto(vector[c][f], num);
+					resultado[c][f] = prod;
+				}
 			}
 			return resultado;
 		}
-		else {return null;}
+		else return null;
+	}
+	
+	public static ComplexNumber[][] productoEntreMatrices(ComplexNumber[][] matr1, ComplexNumber[][] matr2){
+		if(matr1.length == matr2.length && matr1[0].length == matr2.length ) {
+			ComplexNumber[][] resultado = new ComplexNumber [matr1.length][matr1.length];
+			for (int cr = 0; cr<resultado.length ; cr++) {
+				for (int fr = 0; fr<resultado[0].length ; fr++) {
+					for (int m = 0; m<resultado.length ; m++) {
+						
+					}
+					resultado[cr][fr]= null;
+				}
+			}
+			return resultado;
+		}
+		else return null;
 	}
 }

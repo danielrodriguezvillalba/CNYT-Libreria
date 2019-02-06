@@ -90,58 +90,90 @@ class pruebas {
 	}
 	
 	@Test
-	public void deberiaSumarDosVectores() {
+	public void deberiaSumarDosMatrices() {
 		ComplexNumber num1 = new ComplexNumber(1,1,'C');
 		ComplexNumber num2 = new ComplexNumber(2,1,'C');
-		ComplexNumber num3 = new ComplexNumber(4,1,'C');
-		ComplexNumber num4 = new ComplexNumber(7,1,'C');
-		ComplexNumber[] vect1 = new ComplexNumber [2];
-		ComplexNumber[] vect2 = new ComplexNumber [2];
-		vect1[0] = num1;
-		vect1[1] = num2;
-		vect2[0] = num3;
-		vect2[1] = num4;
-		ComplexNumber[] res = Library.sumaVectores(vect1, vect2);
-		assertEquals(5,res[0].getPartR());
-		assertEquals(2,res[0].getPartI());
-		assertEquals(9,res[1].getPartR());
-		assertEquals(2,res[1].getPartI());
+		ComplexNumber num3 = new ComplexNumber(3,2,'C');
+		ComplexNumber num4 = new ComplexNumber(4,-1,'C');
+		ComplexNumber num5 = new ComplexNumber(2,4,'C');
+		ComplexNumber num6 = new ComplexNumber(2,6,'C');
+		ComplexNumber num7 = new ComplexNumber(5,1,'C');
+		ComplexNumber num8 = new ComplexNumber(12,5,'C');
+		ComplexNumber num9 = new ComplexNumber(-11,5,'C');
+		ComplexNumber num10 = new ComplexNumber(4,10,'C');
+		ComplexNumber num11 = new ComplexNumber(5,11,'C');
+		ComplexNumber num12 = new ComplexNumber(1,64,'C');
+		ComplexNumber[][] matr1 = new ComplexNumber [2][3];
+		ComplexNumber[][] matr2 = new ComplexNumber [2][3];
+		matr1[0][0] = num1;
+		matr1[0][1] = num2;
+		matr1[0][2] = num3;
+		matr1[1][0] = num4;
+		matr1[1][1] = num5;
+		matr1[1][2] = num6;
+		matr2[0][0] = num7;
+		matr2[0][1] = num8;
+		matr2[0][2] = num9;
+		matr2[1][0] = num10;
+		matr2[1][1] = num11;
+		matr2[1][2] = num12;
+		ComplexNumber[][] res = Library.sumaMatrices(matr1, matr2);
+		assertEquals(6,res[0][0].getPartR());
+		assertEquals(2,res[0][0].getPartI());
+		assertEquals(14,res[0][1].getPartR());
+		assertEquals(6,res[0][1].getPartI());
+		assertEquals(-8,res[0][2].getPartR());
+		assertEquals(7,res[0][2].getPartI());
+		assertEquals(8,res[1][0].getPartR());
+		assertEquals(9,res[1][0].getPartI());
+		assertEquals(7,res[1][1].getPartR());
+		assertEquals(15,res[1][1].getPartI());
+		assertEquals(3,res[1][2].getPartR());
+		assertEquals(70,res[1][2].getPartI());
 	}
 	
 	@Test
 	public void deberiaSacarInvesoDeUnVector() {
 		ComplexNumber num1 = new ComplexNumber(1,1,'C');
 		ComplexNumber num2 = new ComplexNumber(-2,3,'C');
-		ComplexNumber[] vect1 = new ComplexNumber [2];
-		vect1[0] = num1;
-		vect1[1] = num2;
-		ComplexNumber[] res = Library.inverso(vect1);
-		assertEquals(-1,res[0].getPartR());
-		assertEquals(-1,res[0].getPartI());
-		assertEquals(2,res[1].getPartR());
-		assertEquals(-3,res[1].getPartI());
+		ComplexNumber[][] vect1 = new ComplexNumber [2][1];
+		vect1[0][0] = num1;
+		vect1[1][0] = num2;
+		ComplexNumber[][] res = Library.inverso(vect1);
+		assertEquals(-1,res[0][0].getPartR());
+		assertEquals(-1,res[0][0].getPartI());
+		assertEquals(2,res[1][0].getPartR());
+		assertEquals(-3,res[1][0].getPartI());
 	}
 	
 	@Test
 	public void deberiaHacerMultiplicacionEscalar() {
-		ComplexNumber num1 = new ComplexNumber(6,3,'C');
-		ComplexNumber num2 = new ComplexNumber(0,0,'C');
-		ComplexNumber num3 = new ComplexNumber(5,1,'C');
-		ComplexNumber num4 = new ComplexNumber(4,0,'C');
-		ComplexNumber numMult = new ComplexNumber(3,2,'C');
-		ComplexNumber[] vect1 = new ComplexNumber [4];
-		vect1[0] = num1;
-		vect1[1] = num2;
-		vect1[2] = num3;
-		vect1[3] = num4;
-		ComplexNumber[] res = Library.productoEscalar(vect1, numMult);
-		assertEquals(12,res[0].getPartR());
-		assertEquals(21,res[0].getPartI());
-		assertEquals(0,res[1].getPartR());
-		assertEquals(0,res[1].getPartI());
-		assertEquals(13,res[2].getPartR());
-		assertEquals(13,res[2].getPartI());
-		assertEquals(12,res[3].getPartR());
-		assertEquals(8,res[3].getPartI());
+		ComplexNumber num1 = new ComplexNumber(1,1,'C');
+		ComplexNumber num2 = new ComplexNumber(2,1,'C');
+		ComplexNumber num3 = new ComplexNumber(3,2,'C');
+		ComplexNumber num4 = new ComplexNumber(4,-1,'C');
+		ComplexNumber num5 = new ComplexNumber(2,4,'C');
+		ComplexNumber num6 = new ComplexNumber(2,6,'C');
+		ComplexNumber numMult = new ComplexNumber(1,3,'C');
+		ComplexNumber[][] matr1 = new ComplexNumber [2][3];
+		matr1[0][0] = num1;
+		matr1[0][1] = num2;
+		matr1[0][2] = num3;
+		matr1[1][0] = num4;
+		matr1[1][1] = num5;
+		matr1[1][2] = num6;
+		ComplexNumber[][] res = Library.productoEscalar(matr1, numMult);
+		assertEquals(-2,res[0][0].getPartR());
+		assertEquals(4,res[0][0].getPartI());
+		assertEquals(-1,res[0][1].getPartR());
+		assertEquals(7,res[0][1].getPartI());
+		assertEquals(-3,res[0][2].getPartR());
+		assertEquals(11,res[0][2].getPartI());
+		assertEquals(7,res[1][0].getPartR());
+		assertEquals(11,res[1][0].getPartI());
+		assertEquals(-10,res[1][1].getPartR());
+		assertEquals(10,res[1][1].getPartI());
+		assertEquals(-16,res[1][2].getPartR());
+		assertEquals(12,res[1][2].getPartI());
 	}
 }
