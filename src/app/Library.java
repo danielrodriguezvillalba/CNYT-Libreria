@@ -168,17 +168,28 @@ public class Library {
 		else return null;
 	}
 	
+	/**
+	 * Metodo que multiplica dos matrices dadas
+	 * @param matr1 Matriz 1 a multiplicar 
+	 * @param matr2 Matriz 2 a multiplicar
+	 * @return Matriz resultante de la multiplicacion de las dos dadas, null si no se pueden multiplicar
+	 */
 	public static ComplexNumber[][] productoEntreMatrices(ComplexNumber[][] matr1, ComplexNumber[][] matr2){
 		if(matr1.length == matr2.length && matr1[0].length == matr2.length ) {
-			ComplexNumber[][] resultado = new ComplexNumber [matr1.length][matr1.length];
-			for (int cr = 0; cr<resultado.length ; cr++) {
-				for (int fr = 0; fr<resultado[0].length ; fr++) {
-					for (int m = 0; m<resultado.length ; m++) {
-						
-					}
-					resultado[cr][fr]= null;
-				}
-			}
+			ComplexNumber [][] resultado= new ComplexNumber [matr1.length][matr2[0].length];
+			if (matr1[0].length == matr2.length) {
+		        for (int i = 0; i < matr1.length; i++) {
+		            for (int j = 0; j < matr2[0].length; j++) {
+		                for (int k = 0; k < matr1[0].length; k++) {
+		                	if (resultado[i][j] == null) {
+		                		ComplexNumber num = new ComplexNumber(0,0,'C');
+		                		resultado[i][j] = suma(num,producto(matr1[i][k], matr2[k][j]));
+		                	}
+		                	else { resultado[i][j] = suma(resultado[i][j],producto(matr1[i][k], matr2[k][j]));}
+		                }
+		            }
+		        }
+		    }
 			return resultado;
 		}
 		else return null;
