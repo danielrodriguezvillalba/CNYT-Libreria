@@ -194,4 +194,63 @@ public class Library {
 		}
 		else return null;
 	}
+	
+	/**
+	 * Metodo que encuentra el estado siguiente dado un estado inicial
+	 * @param matr Matriz a ver su comportamiento
+	 * @param vect Estado inicial el cual inicia
+	 * @return vector resultante de la accion entre la matriz y el vector
+	 */
+	public static ComplexNumber[] accionVectorMatriz(ComplexNumber[][] matr, ComplexNumber[] vect) {
+		if (vect.length == matr[0].length) {
+			ComplexNumber[] resultado = new ComplexNumber[matr[0].length];
+	        for (int i = 0; i < matr.length; i++) {
+	        	ComplexNumber temp = new ComplexNumber(0,0,'C');;
+	            for (int j = 0; j < matr[0].length; j++) {
+	            	temp = suma(temp, producto(matr[i][j], vect[j]));
+	            }
+	            resultado[i] = temp;
+	        }
+	        return resultado;
+		}
+		else {
+			return null;
+		}
+	}
+	
+	/**
+	 * Metodo que calcula el producto interno de dos vectores 
+	 * @param vect1 vector 1 a multiplicar
+	 * @param vect2 vector 2 a multiplicar
+	 * @return Numero complejo el cual es el producto interno de los vectores
+	 */
+	public static ComplexNumber productoInterno(ComplexNumber[] vect1 , ComplexNumber[] vect2 ) {
+		if(vect1.length == vect2.length) {
+			ComplexNumber acum = new ComplexNumber(0,0,'C');
+	        for (int i = 0; i < vect1.length; i++) {
+	        	acum = suma(acum, producto(vect1[i], vect2[i]));
+	        }
+	        return acum;
+		}
+		else {
+			return null;
+		}
+	}
+	
+	/**
+	 * Metodo que Retorna la norma de un vector de complejos
+	 * @param vect Vector de complejos a sacar su norma
+	 * @return Norma del vector dado
+	 */
+	public static ComplexNumber normaVector(ComplexNumber[] vect) {
+		if (vect.length != 0) {
+			ComplexNumber norma = productoInterno(vect, vect) ;
+			norma = new ComplexNumber (Math.pow(norma.getPartR(),0.5),Math.pow(norma.getPartI(),0.5),'C');
+			return norma;
+		}
+		else {
+			return null;
+		}
+	}
+	
 }

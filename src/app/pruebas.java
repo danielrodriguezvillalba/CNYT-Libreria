@@ -238,4 +238,76 @@ class pruebas {
 		assertEquals(20,res[2][2].getPartR());
 		assertEquals(-22,res[2][2].getPartI());
 	}
+	
+	@Test 
+	public void deberiaDarLaAccionSiguiente() {
+		ComplexNumber num1 = new ComplexNumber(3,-2,'C');
+		ComplexNumber num2 = new ComplexNumber(1,1,'C');
+		ComplexNumber num3 = new ComplexNumber(5,-6,'C');
+		ComplexNumber num4 = new ComplexNumber(0,1,'C');
+		ComplexNumber num5 = new ComplexNumber(4,2,'C');
+		ComplexNumber num6 = new ComplexNumber(3,-1,'C');
+		ComplexNumber num7 = new ComplexNumber(4,-1,'C');
+		ComplexNumber num8 = new ComplexNumber(2,-2,'C');
+		
+		ComplexNumber num10 = new ComplexNumber(5,-1,'C');
+		ComplexNumber num11 = new ComplexNumber(2,-1,'C');
+		ComplexNumber num12 = new ComplexNumber(6,-4,'C');
+		ComplexNumber num13 = new ComplexNumber(0,0,'C');
+
+		ComplexNumber[][] matr1 = new ComplexNumber [2][4];
+		ComplexNumber[] vect1 = new ComplexNumber[4];
+		
+		matr1[0][0] = num1;
+		matr1[0][1] = num2;
+		matr1[0][2] = num3;
+		matr1[0][3] = num4;
+		matr1[1][0] = num5;
+		matr1[1][1] = num6;
+		matr1[1][2] = num7;
+		matr1[1][3] = num8;
+		
+		vect1[0] = num10;
+		vect1[1] = num11;
+		vect1[2] = num12;
+		vect1[3] = num13;
+		
+		ComplexNumber[] res = Library.accionVectorMatriz(matr1, vect1);
+		
+		assertEquals(22,res[0].getPartR());
+		assertEquals(-68,res[0].getPartI());
+		assertEquals(47,res[1].getPartR());
+		assertEquals(-21,res[1].getPartI());
+	}
+	
+	@Test 
+	public void deberiaCalcularElProductoInterno() {
+		ComplexNumber num1 = new ComplexNumber(3,-2,'C');
+		ComplexNumber num2 = new ComplexNumber(1,1,'C');
+		ComplexNumber num3 = new ComplexNumber(5,-6,'C');
+		ComplexNumber num4 = new ComplexNumber(0,1,'C');
+		
+		ComplexNumber num10 = new ComplexNumber(5,-1,'C');
+		ComplexNumber num11 = new ComplexNumber(2,-1,'C');
+		ComplexNumber num12 = new ComplexNumber(6,-4,'C');
+		ComplexNumber num13 = new ComplexNumber(0,0,'C');
+		
+		ComplexNumber[] vect1 = new ComplexNumber[4];
+		ComplexNumber[] vect2 = new ComplexNumber[4];
+		
+		vect1[0] = num1;
+		vect1[1] = num2;
+		vect1[2] = num3;
+		vect1[3] = num4;
+		
+		vect2[0] = num10;
+		vect2[1] = num11;
+		vect2[2] = num12;
+		vect2[3] = num13;
+		
+		ComplexNumber res = Library.productoInterno(vect1, vect2);
+		
+		assertEquals(22,res.getPartR());
+		assertEquals(-68,res.getPartI());
+	}
 }
