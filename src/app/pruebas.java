@@ -282,15 +282,15 @@ class pruebas {
 	
 	@Test 
 	public void deberiaCalcularElProductoInterno() {
-		ComplexNumber num1 = new ComplexNumber(3,-2,'C');
-		ComplexNumber num2 = new ComplexNumber(1,1,'C');
-		ComplexNumber num3 = new ComplexNumber(5,-6,'C');
-		ComplexNumber num4 = new ComplexNumber(0,1,'C');
+		ComplexNumber num1 = new ComplexNumber(4,3,'C');
+		ComplexNumber num2 = new ComplexNumber(6,-4,'C');
+		ComplexNumber num3 = new ComplexNumber(12,-7,'C');
+		ComplexNumber num4 = new ComplexNumber(0,13,'C');
 		
-		ComplexNumber num10 = new ComplexNumber(5,-1,'C');
-		ComplexNumber num11 = new ComplexNumber(2,-1,'C');
-		ComplexNumber num12 = new ComplexNumber(6,-4,'C');
-		ComplexNumber num13 = new ComplexNumber(0,0,'C');
+		ComplexNumber num10 = new ComplexNumber(4,3,'C');
+		ComplexNumber num11 = new ComplexNumber(6,-4,'C');
+		ComplexNumber num12 = new ComplexNumber(12,-7,'C');
+		ComplexNumber num13 = new ComplexNumber(0,13,'C');
 		
 		ComplexNumber[] vect1 = new ComplexNumber[4];
 		ComplexNumber[] vect2 = new ComplexNumber[4];
@@ -307,7 +307,60 @@ class pruebas {
 		
 		ComplexNumber res = Library.productoInterno(vect1, vect2);
 		
-		assertEquals(22,res.getPartR());
-		assertEquals(-68,res.getPartI());
+		assertEquals(-47,res.getPartR());
+		assertEquals(-192,res.getPartI());
+	}
+	
+	@Test
+	public void deberiaSacarLaNormaDeUnVectorComplejo() {
+		ComplexNumber num1 = new ComplexNumber(4,3,'C');
+		ComplexNumber num2 = new ComplexNumber(6,-4,'C');
+		ComplexNumber num3 = new ComplexNumber(12,-7,'C');
+		ComplexNumber num4 = new ComplexNumber(0,13,'C');
+		
+		ComplexNumber[] vect1 = new ComplexNumber[4];
+		
+		vect1[0] = num1;
+		vect1[1] = num2;
+		vect1[2] = num3;
+		vect1[3] = num4;
+		
+		ComplexNumber res = Library.normaVector(vect1);
+		
+		assertEquals(Math.pow(-192,0.5),res.getPartI());
+		assertEquals(Math.pow(-47,0.5),res.getPartR());
+		
+	}
+	
+	@Test
+	public void deberiaSacarLaDistanciaEntreVectores() {
+		ComplexNumber num1 = new ComplexNumber(4,3,'C');
+		ComplexNumber num2 = new ComplexNumber(6,-4,'C');
+		ComplexNumber num3 = new ComplexNumber(12,-7,'C');
+		ComplexNumber num4 = new ComplexNumber(0,13,'C');
+		
+		ComplexNumber num10 = new ComplexNumber(3,2,'C');
+		ComplexNumber num11 = new ComplexNumber(-5,-5,'C');
+		ComplexNumber num12 = new ComplexNumber(1,-8,'C');
+		ComplexNumber num13 = new ComplexNumber(12,-3,'C');
+		
+		ComplexNumber[] vect1 = new ComplexNumber[4];
+		ComplexNumber[] vect2 = new ComplexNumber[4];
+		
+		vect1[0] = num1;
+		vect1[1] = num2;
+		vect1[2] = num3;
+		vect1[3] = num4;
+		
+		vect2[0] = num10;
+		vect2[1] = num11;
+		vect2[2] = num12;
+		vect2[3] = num13;
+		
+		ComplexNumber res = Library.distancia(vect1, vect2);
+		
+		assertEquals(Math.pow(-338,0.5),res.getPartI());
+		assertEquals(Math.pow(128,0.5),res.getPartR());
+		
 	}
 }

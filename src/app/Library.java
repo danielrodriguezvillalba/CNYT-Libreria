@@ -109,6 +109,26 @@ public class Library {
 			return null;
 		}
 	}
+	
+	/**
+	 * Metodo que resta dos vectores de complejos
+	 * @param vector1 Vector 1 a ser restado
+	 * @param vector2 Vector 2 a ser restado
+	 * @return vector resultante de la resta de dos vectores dados
+	 */
+	public static ComplexNumber[] restaVectores(ComplexNumber[] matr1 ,ComplexNumber[] matr2 ) {
+		if(matr1.length == matr2.length) {
+			ComplexNumber[] resultado = new ComplexNumber [matr1.length];
+			for (int c = 0; c<matr1.length ; c++) {
+				ComplexNumber res = resta(matr1[c],matr2[c]);
+				resultado[c] = res;
+			}
+			return resultado;
+		}
+		else {
+			return null;
+		}
+	}
 	/**
 	 * Metodo que retorna el inverso de un vector
 	 * @param vector Vector de complejos el cual se va a sacar el inverso
@@ -245,8 +265,25 @@ public class Library {
 	public static ComplexNumber normaVector(ComplexNumber[] vect) {
 		if (vect.length != 0) {
 			ComplexNumber norma = productoInterno(vect, vect) ;
-			norma = new ComplexNumber (Math.pow(norma.getPartR(),0.5),Math.pow(norma.getPartI(),0.5),'C');
-			return norma;
+			ComplexNumber res = new ComplexNumber (Math.pow(norma.getPartR(),0.5),Math.pow(norma.getPartI(),0.5),'C');
+			return res;
+		}
+		else {
+			return null;
+		}
+	}
+	
+	/**
+	 * Metodo que da la distancia entre dos vectores complejos
+	 * @param vect1 vector 1 a sacar la distancia
+	 * @param vect2 vector 2 a sacar la distancia
+	 * @return Complejo que indica la distancia entre los vectores
+	 */
+	public static ComplexNumber distancia(ComplexNumber[] vect1,ComplexNumber[] vect2) {
+		if(vect1.length == vect2.length) {
+			ComplexNumber[] resta = restaVectores(vect1, vect2);
+			ComplexNumber inner = normaVector(resta);
+			return inner;
 		}
 		else {
 			return null;
