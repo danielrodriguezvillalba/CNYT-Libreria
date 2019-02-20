@@ -292,18 +292,18 @@ class pruebas {
 		ComplexNumber num12 = new ComplexNumber(12,-7,'C');
 		ComplexNumber num13 = new ComplexNumber(0,13,'C');
 		
-		ComplexNumber[] vect1 = new ComplexNumber[4];
-		ComplexNumber[] vect2 = new ComplexNumber[4];
+		ComplexNumber[][] vect1 = new ComplexNumber[4][1];
+		ComplexNumber[][] vect2 = new ComplexNumber[4][1];
 		
-		vect1[0] = num1;
-		vect1[1] = num2;
-		vect1[2] = num3;
-		vect1[3] = num4;
+		vect1[0][0] = num1;
+		vect1[1][0] = num2;
+		vect1[2][0] = num3;
+		vect1[3][0] = num4;
 		
-		vect2[0] = num10;
-		vect2[1] = num11;
-		vect2[2] = num12;
-		vect2[3] = num13;
+		vect2[0][0] = num10;
+		vect2[1][0] = num11;
+		vect2[2][0] = num12;
+		vect2[3][0] = num13;
 		
 		ComplexNumber res = Library.productoInterno(vect1, vect2);
 		
@@ -318,14 +318,14 @@ class pruebas {
 		ComplexNumber num3 = new ComplexNumber(12,-7,'C');
 		ComplexNumber num4 = new ComplexNumber(0,13,'C');
 		
-		ComplexNumber[] vect1 = new ComplexNumber[4];
+		ComplexNumber[][] vect1 = new ComplexNumber[4][1];
 		
-		vect1[0] = num1;
-		vect1[1] = num2;
-		vect1[2] = num3;
-		vect1[3] = num4;
+		vect1[0][0] = num1;
+		vect1[1][0] = num2;
+		vect1[2][0] = num3;
+		vect1[3][0] = num4;
 		
-		ComplexNumber res = Library.normaVector(vect1);
+		ComplexNumber res = Library.normaMatriz(vect1);
 		
 		assertEquals(Math.pow(-192,0.5),res.getPartI());
 		assertEquals(Math.pow(-47,0.5),res.getPartR());
@@ -344,18 +344,18 @@ class pruebas {
 		ComplexNumber num12 = new ComplexNumber(1,-8,'C');
 		ComplexNumber num13 = new ComplexNumber(12,-3,'C');
 		
-		ComplexNumber[] vect1 = new ComplexNumber[4];
-		ComplexNumber[] vect2 = new ComplexNumber[4];
+		ComplexNumber[][] vect1 = new ComplexNumber[4][1];
+		ComplexNumber[][] vect2 = new ComplexNumber[4][1];
 		
-		vect1[0] = num1;
-		vect1[1] = num2;
-		vect1[2] = num3;
-		vect1[3] = num4;
+		vect1[0][0] = num1;
+		vect1[1][0] = num2;
+		vect1[2][0] = num3;
+		vect1[3][0] = num4;
 		
-		vect2[0] = num10;
-		vect2[1] = num11;
-		vect2[2] = num12;
-		vect2[3] = num13;
+		vect2[0][0] = num10;
+		vect2[1][0] = num11;
+		vect2[2][0] = num12;
+		vect2[3][0] = num13;
 		
 		ComplexNumber res = Library.distancia(vect1, vect2);
 		

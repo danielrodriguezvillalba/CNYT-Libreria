@@ -111,17 +111,19 @@ public class Library {
 	}
 	
 	/**
-	 * Metodo que resta dos vectores de complejos
-	 * @param vector1 Vector 1 a ser restado
-	 * @param vector2 Vector 2 a ser restado
+	 * Metodo que resta dos matrices de complejos
+	 * @param vector1 Matriz 1 a ser restado
+	 * @param vector2 Matriz 2 a ser restado
 	 * @return vector resultante de la resta de dos vectores dados
 	 */
-	public static ComplexNumber[] restaVectores(ComplexNumber[] matr1 ,ComplexNumber[] matr2 ) {
-		if(matr1.length == matr2.length) {
-			ComplexNumber[] resultado = new ComplexNumber [matr1.length];
-			for (int c = 0; c<matr1.length ; c++) {
-				ComplexNumber res = resta(matr1[c],matr2[c]);
-				resultado[c] = res;
+	public static ComplexNumber[][] restaMatrices(ComplexNumber[][] vect1 ,ComplexNumber[][] vect2 ) {
+		if(vect1.length == vect2.length && vect1[0].length == vect2[0].length) {
+			ComplexNumber[][] resultado = new ComplexNumber [vect1.length][vect2[0].length];
+			for (int c = 0; c<vect1.length ; c++) {
+				for (int f = 0; f<vect1[0].length ; f++) {
+					ComplexNumber res = resta(vect1[c][f],vect2[c][f]);
+					resultado[c][f] = res;
+				}
 			}
 			return resultado;
 		}
@@ -238,16 +240,18 @@ public class Library {
 	}
 	
 	/**
-	 * Metodo que calcula el producto interno de dos vectores 
+	 * Metodo que calcula el producto interno de dos matrices 
 	 * @param vect1 vector 1 a multiplicar
 	 * @param vect2 vector 2 a multiplicar
-	 * @return Numero complejo el cual es el producto interno de los vectores
+	 * @return Numero complejo el cual es el producto interno de los matrices
 	 */
-	public static ComplexNumber productoInterno(ComplexNumber[] vect1 , ComplexNumber[] vect2 ) {
-		if(vect1.length == vect2.length) {
+	public static ComplexNumber productoInterno(ComplexNumber[][] vect1 , ComplexNumber[][] vect2 ) {
+		if(vect1.length == vect2.length && vect1[0].length == vect2[0].length) {
 			ComplexNumber acum = new ComplexNumber(0,0,'C');
 	        for (int i = 0; i < vect1.length; i++) {
-	        	acum = suma(acum, producto(vect1[i], vect2[i]));
+	        	for (int j = 0;j  < vect1[0].length; j++) {
+	        		acum = suma(acum, producto(vect1[i][j], vect2[i][j]));
+	        	}
 	        }
 	        return acum;
 		}
@@ -261,7 +265,7 @@ public class Library {
 	 * @param vect Vector de complejos a sacar su norma
 	 * @return Norma del vector dado
 	 */
-	public static ComplexNumber normaVector(ComplexNumber[] vect) {
+	public static ComplexNumber normaMatriz(ComplexNumber[][] vect) {
 		if (vect.length != 0) {
 			ComplexNumber norma = productoInterno(vect, vect) ;
 			ComplexNumber res = new ComplexNumber (Math.pow(norma.getPartR(),0.5),Math.pow(norma.getPartI(),0.5),'C');
@@ -273,15 +277,15 @@ public class Library {
 	}
 	
 	/**
-	 * Metodo que da la distancia entre dos vectores complejos
-	 * @param vect1 vector 1 a sacar la distancia
-	 * @param vect2 vector 2 a sacar la distancia
-	 * @return Complejo que indica la distancia entre los vectores
+	 * Metodo que da la distancia entre dos matrices complejos
+	 * @param vect1 matriz 1 a sacar la distancia
+	 * @param vect2 matriz 2 a sacar la distancia
+	 * @return Complejo que indica la distancia entre las matrices
 	 */
-	public static ComplexNumber distancia(ComplexNumber[] vect1,ComplexNumber[] vect2) {
+	public static ComplexNumber distancia(ComplexNumber[][] vect1,ComplexNumber[][] vect2) {
 		if(vect1.length == vect2.length) {
-			ComplexNumber[] resta = restaVectores(vect1, vect2);
-			ComplexNumber inner = normaVector(resta);
+			ComplexNumber[][] resta = restaMatrices(vect1, vect2);
+			ComplexNumber inner = normaMatriz(resta);
 			return inner;
 		}
 		else {
