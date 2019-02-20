@@ -443,8 +443,6 @@ class pruebas {
 		
 		ComplexNumber num10 = new ComplexNumber(5,-1,'C');
 		ComplexNumber num11 = new ComplexNumber(2,-1,'C');
-		ComplexNumber num12 = new ComplexNumber(6,-4,'C');
-		ComplexNumber num13 = new ComplexNumber(1,-2,'C');
 
 		ComplexNumber[][] matr1 = new ComplexNumber [3][3];
 		ComplexNumber[][] vect1 = new ComplexNumber[2][1];
@@ -452,11 +450,11 @@ class pruebas {
 		matr1[0][0] = num1;
 		matr1[0][1] = num2;
 		matr1[0][2] = num3;
-		matr1[1][0] = num5;
-		matr1[1][1] = num6;
-		matr1[1][2] = num7;
-		matr1[2][0] = num8;
-		matr1[2][1] = num4;
+		matr1[1][0] = num4;
+		matr1[1][1] = num5;
+		matr1[1][2] = num6;
+		matr1[2][0] = num7;
+		matr1[2][1] = num8;
 		matr1[2][2] = num9;
 		
 		vect1[0][0] = num10;
@@ -464,6 +462,24 @@ class pruebas {
 		
 		ComplexNumber[][] res = Library.productoTenssor(matr1, vect1);
 		
+		assertEquals(13,res[0][0].getPartR());
+		assertEquals(-13,res[0][0].getPartI());
+		assertEquals(6,res[0][1].getPartR());
+		assertEquals(4,res[0][1].getPartI());
+		assertEquals(19,res[0][2].getPartR());
+		assertEquals(-35,res[0][2].getPartI());
+		assertEquals(4,res[1][0].getPartR());
+		assertEquals(-7,res[1][0].getPartI());
+		assertEquals(3,res[1][1].getPartR());
+		assertEquals(1,res[1][1].getPartI());
+		assertEquals(4,res[1][2].getPartR());
+		assertEquals(-17,res[1][2].getPartI());
+		assertEquals(1,res[2][0].getPartR());
+		assertEquals(5,res[2][0].getPartI());
+		assertEquals(22,res[2][1].getPartR());
+		assertEquals(6,res[2][1].getPartI());
+		assertEquals(14,res[2][2].getPartR());
+		assertEquals(-8,res[2][2].getPartI());
 	}
 	@Test
 	public void deberiaSacarLaConjugadaDeUnaMatriz() {
@@ -515,5 +531,23 @@ class pruebas {
 		assertEquals(6,res[0][1].getPartI());
 		assertEquals(0,res[1][1].getPartR());
 		assertEquals(-1,res[1][1].getPartI());
+	}
+	
+	@Test
+	public void deberiaDecirQueEsHermitiana() {
+		ComplexNumber num1 = new ComplexNumber(7,0,'C');
+		ComplexNumber num2 = new ComplexNumber(6,5,'C');
+		ComplexNumber num3 = new ComplexNumber(-3,0,'C');
+		ComplexNumber num4 = new ComplexNumber(6,-5,'C');
+		
+		ComplexNumber[][] matr1 = new ComplexNumber [2][2];
+		
+		matr1[0][0] = num1;
+		matr1[0][1] = num2;
+		matr1[1][0] = num4;
+		matr1[1][1] = num3;
+		
+		boolean res = Library.esHermitiana(matr1);
+		assertTrue(res);
 	}
 }

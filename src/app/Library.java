@@ -89,10 +89,10 @@ public class Library {
 		}
 	}
 	/**
-	 * Metodo que suma dos vectores de complejos
-	 * @param vector1 Vector 1 a ser sumado
-	 * @param vector2 Vector 2 a ser sumado
-	 * @return vector resultante de la suma de dos vectores dados
+	 * Metodo que suma dos Matrices de complejos
+	 * @param matr1 Matriz 1 a ser sumado
+	 * @param matr2 Matriz 2 a ser sumado
+	 * @return Matriz resultante de la suma de dos vectores dados
 	 */
 	public static ComplexNumber[][] sumaMatrices(ComplexNumber[][] matr1 ,ComplexNumber[][] matr2 ) {
 		if(matr1.length == matr2.length && matr1[0].length == matr2[0].length ) {
@@ -132,16 +132,16 @@ public class Library {
 		}
 	}
 	/**
-	 * Metodo que retorna el inverso de un vector
-	 * @param vector Vector de complejos el cual se va a sacar el inverso
-	 * @return Vector inverso del vector dado
+	 * Metodo que retorna el inverso de una matriz
+	 * @param matr Matriz de complejos el cual se va a sacar el inverso
+	 * @return Matriz inversa de la dada
 	 */
-	public static ComplexNumber[][] inverso(ComplexNumber[][] vector) {
-		if(vector.length > 0) {
-			ComplexNumber[][] resultado = new ComplexNumber [vector.length][vector[0].length];
-			for (int c = 0; c<vector.length ; c++) {
-				for (int f = 0; f<vector[0].length ; f++) {
-					ComplexNumber inv = inverso(vector[c][f]);
+	public static ComplexNumber[][] inverso(ComplexNumber[][] matr) {
+		if(matr.length > 0) {
+			ComplexNumber[][] resultado = new ComplexNumber [matr.length][matr[0].length];
+			for (int c = 0; c<matr.length ; c++) {
+				for (int f = 0; f<matr[0].length ; f++) {
+					ComplexNumber inv = inverso(matr[c][f]);
 					resultado[c][f] = inv;
 				}
 			}
@@ -349,7 +349,16 @@ public class Library {
 	 * @return Booleano que dice si la matriz es o no Hermitiana
 	 */
 	public static boolean esHermitiana (ComplexNumber[][] matr){
-		return true;
+		ComplexNumber[][] her = adjunta(matr);
+		boolean var = true;
+		for (int i = 0; i < matr.length; i++) {
+	        for (int j = 0; j < matr[0].length; j++) {
+	        	if(!matr[i][j].equals(her[i][j])) {
+	        		var = false;
+	        	}
+	        }
+		}
+		return var;
 	}
 	
 	/**
@@ -359,14 +368,15 @@ public class Library {
 	 * @return Matriz resultante del producto tensor
 	 */
 	public static ComplexNumber[][] productoTenssor (ComplexNumber[][] matr1,ComplexNumber[][] matr2){
-		ComplexNumber[][] prod = new ComplexNumber [matr1[0].length*matr2[0].length][matr1.length*matr2.length];
+		ComplexNumber[][] prod = new ComplexNumber [matr1.length*matr2.length][matr1[0].length*matr2[0].length];
 	    for (int i = 0; i < matr1.length; i++) { 
-	        for (int k = 0; k < matr2.length; k++) { 
-	            for (int j = 0; j < matr1[0].length; j++) { 
-	                for (int l = 0; l < matr2[0].length; l++) { 
-	                	System.out.println(matr1[i][j].getPartR()+ " 1 " +matr1[i][j].getPartI());
-	                	System.out.println(matr2[k][l].getPartR()+ " 2 " +matr2[k][l].getPartI());
-	                    prod[i + l][j + k] = producto(matr1[i][j], matr2[k][l]); 
+	        for (int k = 0; k < matr1[i].length; k++) { 
+	            for (int j = 0; j < matr2.length; j++) { 
+	                for (int l = 0; l < matr2[j].length; l++) { 
+	                	//System.out.println((matr2.length*i + j ) + " , " + (matr2[j].length*k + l));
+		                //System.out.println(matr1[i][k].getPartR()+ " 1 " +matr1[i][k].getPartI());
+		                //System.out.println(matr2[j][l].getPartR()+ " 2 " +matr2[j][l].getPartI());
+	                	prod[matr2.length*i + j ][ matr2[j].length*k + l] = producto(matr1[i][k], matr2[j][l]);	                     
 	                } 
 	            }
 	        } 
@@ -389,6 +399,11 @@ public class Library {
 		return temp ;
 	}
 	
+	/**
+	 * Metodo que retorna la adjunta de una matriz dada
+	 * @param matr Matriz a la cual devolver su adjunta
+	 * @return Matriz adjunta de la dada
+	 */
 	public static ComplexNumber[][] adjunta (ComplexNumber[][] matr){
 		ComplexNumber[][] temp = transpuesta(matr);
 		temp = conjugada(temp);
