@@ -219,7 +219,6 @@ public class Library {
 	 * Metodo que encuentra el estado siguiente dado un estado inicial
 	 * @param matr Matriz a ver su comportamiento
 	 * @param vect Estado inicial el cual inicia
-	 * @return vector resultante de la accion entre la matriz y el vector
 	 */
 	public static ComplexNumber[] accionVectorMatriz(ComplexNumber[][] matr, ComplexNumber[] vect) {
 		if (vect.length == matr[0].length) {
@@ -356,22 +355,40 @@ public class Library {
 	 * @return Matriz resultante del producto tensor
 	 */
 	public static ComplexNumber[][] productoTenssor (ComplexNumber[][] matr1,ComplexNumber[][] matr2){
-		int total = matr1.length*matr2[0].length;
-		ComplexNumber[][] prod = new ComplexNumber [total][total];
-		for (int p = 0; p < prod.length; p++) {
-	        for (int q = 0; q < prod[0].length; q++) {
-				for (int i = 0; i < matr1.length; i++) {
-			        for (int j = 0; j < matr1[0].length; j++) {
-			        	for (int k = 0; k < matr2.length; k++) {
-			    	        for (int l = 0; l < matr2[0].length; l++) {
-			    	        	prod[p][q] = producto(matr1[i][j], matr2[k][l]);
-			    	        }
-			        	}
-	    	        }
-	    		}
-	        }
-		}
+		ComplexNumber[][] prod = new ComplexNumber [matr1[0].length*matr2[0].length][matr1.length*matr2.length];
+	    for (int i = 0; i < matr1.length; i++) { 
+	        for (int k = 0; k < matr2.length; k++) { 
+	            for (int j = 0; j < matr1[0].length; j++) { 
+	                for (int l = 0; l < matr2[0].length; l++) { 
+	                	System.out.println(matr1[i][j].getPartR()+ " 1 " +matr1[i][j].getPartI());
+	                	System.out.println(matr2[k][l].getPartR()+ " 2 " +matr2[k][l].getPartI());
+	                    prod[i + l][j + k] = producto(matr1[i][j], matr2[k][l]); 
+	                } 
+	            }
+	        } 
+	    }
 		return prod;
+	}
+	
+	/**
+	 * Metodo que retorna la conjugada de una matriz dada
+	 * @param matr Matriz sacar su conjugada
+	 * @return Matriz transpuesta de la dada
+	 */
+	public static ComplexNumber[][] conjugada(ComplexNumber[][] matr){
+		ComplexNumber[][] temp = new ComplexNumber [matr.length][matr[0].length];
+		for (int i = 0; i < matr.length; i++) { 
+		       for (int k = 0; k < matr[0].length; k++) {
+		    	   temp[i][k] = conjugado(matr[i][k]);
+		       }
+		 }
+		return temp ;
+	}
+	
+	public static ComplexNumber[][] adjunta (ComplexNumber[][] matr){
+		ComplexNumber[][] temp = transpuesta(matr);
+		temp = conjugada(temp);
+		return temp;
 	}
 	
 }

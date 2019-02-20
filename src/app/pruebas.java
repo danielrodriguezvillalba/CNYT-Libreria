@@ -428,4 +428,92 @@ class pruebas {
 		boolean res = Library.esUnitaria(matr1);
 		assertTrue(res);
 	}
+	
+	@Test
+	public void deberiaSacarElProductoTensor() {
+		ComplexNumber num1 = new ComplexNumber(3,-2,'C');
+		ComplexNumber num2 = new ComplexNumber(1,1,'C');
+		ComplexNumber num3 = new ComplexNumber(5,-6,'C');
+		ComplexNumber num4 = new ComplexNumber(0,1,'C');
+		ComplexNumber num5 = new ComplexNumber(4,2,'C');
+		ComplexNumber num6 = new ComplexNumber(3,-1,'C');
+		ComplexNumber num7 = new ComplexNumber(4,-1,'C');
+		ComplexNumber num8 = new ComplexNumber(2,-2,'C');
+		ComplexNumber num9 = new ComplexNumber(1,-2,'C');
+		
+		ComplexNumber num10 = new ComplexNumber(5,-1,'C');
+		ComplexNumber num11 = new ComplexNumber(2,-1,'C');
+		ComplexNumber num12 = new ComplexNumber(6,-4,'C');
+		ComplexNumber num13 = new ComplexNumber(1,-2,'C');
+
+		ComplexNumber[][] matr1 = new ComplexNumber [3][3];
+		ComplexNumber[][] vect1 = new ComplexNumber[2][1];
+		
+		matr1[0][0] = num1;
+		matr1[0][1] = num2;
+		matr1[0][2] = num3;
+		matr1[1][0] = num5;
+		matr1[1][1] = num6;
+		matr1[1][2] = num7;
+		matr1[2][0] = num8;
+		matr1[2][1] = num4;
+		matr1[2][2] = num9;
+		
+		vect1[0][0] = num10;
+		vect1[1][0]= num11;
+		
+		ComplexNumber[][] res = Library.productoTenssor(matr1, vect1);
+		
+	}
+	@Test
+	public void deberiaSacarLaConjugadaDeUnaMatriz() {
+		ComplexNumber num1 = new ComplexNumber(3,-2,'C');
+		ComplexNumber num2 = new ComplexNumber(1,1,'C');
+		ComplexNumber num3 = new ComplexNumber(5,-6,'C');
+		ComplexNumber num4 = new ComplexNumber(0,1,'C');
+		
+		ComplexNumber[][] matr1 = new ComplexNumber [2][2];
+		
+		matr1[0][0] = num1;
+		matr1[0][1] = num2;
+		matr1[1][0] = num3;
+		matr1[1][1] = num4;
+		
+		ComplexNumber[][]res = Library.conjugada(matr1);
+		
+		assertEquals(3,res[0][0].getPartR());
+		assertEquals(2,res[0][0].getPartI());
+		assertEquals(1,res[0][1].getPartR());
+		assertEquals(-1,res[0][1].getPartI());
+		assertEquals(5,res[1][0].getPartR());
+		assertEquals(6,res[1][0].getPartI());
+		assertEquals(0,res[1][1].getPartR());
+		assertEquals(-1,res[1][1].getPartI());
+	}
+	
+	@Test
+	public void deberiaSacarLaAdjuntaDeUnaMatriz() {
+		ComplexNumber num1 = new ComplexNumber(3,-2,'C');
+		ComplexNumber num2 = new ComplexNumber(1,1,'C');
+		ComplexNumber num3 = new ComplexNumber(5,-6,'C');
+		ComplexNumber num4 = new ComplexNumber(0,1,'C');
+		
+		ComplexNumber[][] matr1 = new ComplexNumber [2][2];
+		
+		matr1[0][0] = num1;
+		matr1[0][1] = num2;
+		matr1[1][0] = num3;
+		matr1[1][1] = num4;
+		
+		ComplexNumber[][]res = Library.adjunta(matr1);
+		
+		assertEquals(3,res[0][0].getPartR());
+		assertEquals(2,res[0][0].getPartI());
+		assertEquals(1,res[1][0].getPartR());
+		assertEquals(-1,res[1][0].getPartI());
+		assertEquals(5,res[0][1].getPartR());
+		assertEquals(6,res[0][1].getPartI());
+		assertEquals(0,res[1][1].getPartR());
+		assertEquals(-1,res[1][1].getPartI());
+	}
 }
