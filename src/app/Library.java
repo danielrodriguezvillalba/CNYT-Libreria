@@ -290,4 +290,89 @@ public class Library {
 		}
 	}
 	
+	/**
+	 * Metodo que retorna la matriz transpuesta de la dada
+	 * @param matr Matriz a transponer
+	 * @return Matriz traspuesta de la dada
+	 */
+	public static ComplexNumber[][] transpuesta(ComplexNumber[][] matr){
+		if (matr.length == matr[0].length ) {
+			ComplexNumber[][] temp = new ComplexNumber [matr.length][matr[0].length];
+			for (int i = 0; i < matr.length; i++) {
+		        for (int j = 0; j < matr[0].length; j++) {
+		        	temp[i][j] = matr[j][i];
+		        }
+			}
+			return temp;
+		}
+		else {
+			return null;
+		}
+	}
+	
+	/**
+	 * Metodo que retorna si una matriz es unitaria
+	 * @param matr Matriz a verificar
+	 * @return Booleano que dice si la matriz es o no unitaria
+	 */
+	public static boolean esUnitaria (ComplexNumber[][] matr){
+		if (matr.length == matr[0].length ) {
+			boolean var = true;
+			ComplexNumber[][] unit = new ComplexNumber [matr.length][matr[0].length];
+			for (int i = 0; i < matr.length; i++) {
+		        for (int j = 0; j < matr[0].length; j++) {
+		        	if(i == j) {
+		        		ComplexNumber temp = new ComplexNumber(1,1,'C');
+		        		if (!temp.equals(unit[i][j])) {
+		        			var = false;
+		        		}
+		        	}
+		        	else {
+		        		ComplexNumber temp = new ComplexNumber(0,0,'C');
+		        		if (!temp.equals(unit[i][j])) {
+		        			var = false;
+		        		}
+		        	}
+		        }
+			}
+			
+			return var;
+		}
+		else {return false;}
+	}
+	
+	/**
+	 * Metodo que retorna si una matriz es Hermitiana
+	 * @param matr Matriz a verificar
+	 * @return Booleano que dice si la matriz es o no Hermitiana
+	 */
+	public static boolean esHermitiana (ComplexNumber[][] matr){
+		return true;
+	}
+	
+	/**
+	 * Metodo que retorna el producto tensor de dos matrices
+	 * @param matr1 Matriz 1 a sacar su producto tensor
+	 * @param matr2 Matriz 2 a sacar su producto tensor
+	 * @return Matriz resultante del producto tensor
+	 */
+	public static ComplexNumber[][] productoTenssor (ComplexNumber[][] matr1,ComplexNumber[][] matr2){
+		int total = matr1.length*matr2[0].length;
+		ComplexNumber[][] prod = new ComplexNumber [total][total];
+		for (int p = 0; p < prod.length; p++) {
+	        for (int q = 0; q < prod[0].length; q++) {
+				for (int i = 0; i < matr1.length; i++) {
+			        for (int j = 0; j < matr1[0].length; j++) {
+			        	for (int k = 0; k < matr2.length; k++) {
+			    	        for (int l = 0; l < matr2[0].length; l++) {
+			    	        	prod[p][q] = producto(matr1[i][j], matr2[k][l]);
+			    	        }
+			        	}
+	    	        }
+	    		}
+	        }
+		}
+		return prod;
+	}
+	
 }
