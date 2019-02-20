@@ -316,20 +316,19 @@ public class Library {
 	 * @return Booleano que dice si la matriz es o no unitaria
 	 */
 	public static boolean esUnitaria (ComplexNumber[][] matr){
+		boolean var = true;
 		if (matr.length == matr[0].length ) {
-			boolean var = true;
-			ComplexNumber[][] unit = new ComplexNumber [matr.length][matr[0].length];
 			for (int i = 0; i < matr.length; i++) {
 		        for (int j = 0; j < matr[0].length; j++) {
 		        	if(i == j) {
 		        		ComplexNumber temp = new ComplexNumber(1,1,'C');
-		        		if (!temp.equals(unit[i][j])) {
+		        		if (!temp.equals(matr[i][j])) {
 		        			var = false;
 		        		}
 		        	}
 		        	else {
 		        		ComplexNumber temp = new ComplexNumber(0,0,'C');
-		        		if (!temp.equals(unit[i][j])) {
+		        		if (!temp.equals(matr[i][j])) {
 		        			var = false;
 		        		}
 		        	}
