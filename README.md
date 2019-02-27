@@ -2,18 +2,18 @@
 
 ## Comenzando 🚀
 
-_ En este repositorio encontrara una libreria desarrollada en Java, cuyo objetivo es servir de calculadora de numeros complejos._
+En este repositorio encontrara una libreria desarrollada en Java, cuyo objetivo es servir de calculadora de numeros complejos.
 
 ## Requisitos 📋
 
-_ Para hacer uso de esta libreria es necesario tener un IDE( Eclipse, Netbeans ), adicionalmente de contar con los archivos de este repositorio._
+Para hacer uso de esta libreria es necesario tener un IDE( Eclipse, Netbeans ), adicionalmente de contar con los archivos de este repositorio.
 
 ## Construido con 🛠️
-_ * [ Java ] (Java v8 )
+* [ Java ] ( Java v8 )
 
 ## Ejecutando las pruebas ⚙️
 
-_Las pruebas estan desarrolladas con la depedencia de JUnit 4.0 por lo tanto para correrlas es necesario tener dicha dependencia._
+Las pruebas estan desarrolladas con la depedencia de JUnit 4.0 por lo tanto para correrlas es necesario tener dicha dependencia.
 
 ## Autores ✒️
 
