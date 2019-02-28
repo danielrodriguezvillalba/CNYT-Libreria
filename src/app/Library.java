@@ -222,13 +222,14 @@ public class Library {
 	 * @param matr Matriz a ver su comportamiento
 	 * @param vect Estado inicial el cual inicia
 	 */
-	public static ComplexNumber[] accionVectorMatriz(ComplexNumber[][] matr, ComplexNumber[] vect) {
+	public static ComplexNumber[] accionVectorMatriz(int[][] matr, ComplexNumber[] vect) {
 		if (vect.length == matr[0].length) {
 			ComplexNumber[] resultado = new ComplexNumber[matr[0].length];
 	        for (int i = 0; i < matr.length; i++) {
 	        	ComplexNumber temp = new ComplexNumber(0,0,'C');;
 	            for (int j = 0; j < matr[0].length; j++) {
-	            	temp = suma(temp, producto(matr[i][j], vect[j]));
+	            	ComplexNumber var = new ComplexNumber(matr[i][j],0,'C');
+	            	temp = suma(temp, producto(var, vect[j]));
 	            }
 	            resultado[i] = temp;
 	        }
@@ -372,10 +373,7 @@ public class Library {
 	    for (int i = 0; i < matr1.length; i++) { 
 	        for (int k = 0; k < matr1[i].length; k++) { 
 	            for (int j = 0; j < matr2.length; j++) { 
-	                for (int l = 0; l < matr2[j].length; l++) { 
-	                	//System.out.println((matr2.length*i + j ) + " , " + (matr2[j].length*k + l));
-		                //System.out.println(matr1[i][k].getPartR()+ " 1 " +matr1[i][k].getPartI());
-		                //System.out.println(matr2[j][l].getPartR()+ " 2 " +matr2[j][l].getPartI());
+	                for (int l = 0; l < matr2[j].length; l++) {
 	                	prod[matr2.length*i + j ][ matr2[j].length*k + l] = producto(matr1[i][k], matr2[j][l]);	                     
 	                } 
 	            }
@@ -410,4 +408,44 @@ public class Library {
 		return temp;
 	}
 	
+	/**
+	 * Metodo que calcula el estado de las canicas en el numero de clicks dado
+	 * @param matrBool Matriz Booleana en la cual se conocen los caminos de las canicas
+	 * @param initialState Estado inicial de las canicas 
+	 * @param clicks Numero de clicks en los cuales se va a calcular su estado
+	 * @return Estado final de las canicas despues de n Clicks
+	 */
+	public static ComplexNumber[] canicasCoeficientesComplejos(int[][] matrBool,ComplexNumber[] initialState,int clicks ) {
+		ComplexNumber[] res ;
+		if(esBooleana(matrBool)) {
+			ComplexNumber[] temp = initialState;
+			for (int i = 0; i < clicks; i++) { 
+				res = accionVectorMatriz(matrBool, temp);
+				temp = res;
+			}
+			return temp;
+		}
+		else {
+			return null;
+		}
+	}
+	
+	/**
+	 * Metodo que dice si una matriz es booleana
+	 * @param matr Matriz A verificar 
+	 * @return Booleano que indica si la matriz es booleana o no
+	 */
+	private static boolean esBooleana(int[][] matr) {
+		boolean bandera = true;
+		for (int i = 0; i < matr.length; i++) { 
+	        for (int j = 0; j < matr[0].length; j++) {
+	        	if(matr[i][j]==0 || matr[i][j]==1 ) {
+	        	}
+	        	else {
+	        		bandera = false;
+	        	}
+	        }
+		}
+		return bandera;
+	}
 }

@@ -241,21 +241,21 @@ class pruebas {
 	
 	@Test 
 	public void deberiaDarLaAccionSiguiente() {
-		ComplexNumber num1 = new ComplexNumber(3,-2,'C');
-		ComplexNumber num2 = new ComplexNumber(1,1,'C');
-		ComplexNumber num3 = new ComplexNumber(5,-6,'C');
-		ComplexNumber num4 = new ComplexNumber(0,1,'C');
-		ComplexNumber num5 = new ComplexNumber(4,2,'C');
-		ComplexNumber num6 = new ComplexNumber(3,-1,'C');
-		ComplexNumber num7 = new ComplexNumber(4,-1,'C');
-		ComplexNumber num8 = new ComplexNumber(2,-2,'C');
+		int num1 = 0;
+		int num2 = 1;
+		int num3 = 0;
+		int num4 = 0;
+		int num5 = 1;
+		int num6 = 0;
+		int num7 = 0;
+		int num8 = 1;
 		
 		ComplexNumber num10 = new ComplexNumber(5,-1,'C');
 		ComplexNumber num11 = new ComplexNumber(2,-1,'C');
 		ComplexNumber num12 = new ComplexNumber(6,-4,'C');
 		ComplexNumber num13 = new ComplexNumber(0,0,'C');
 
-		ComplexNumber[][] matr1 = new ComplexNumber [2][4];
+		int[][] matr1 = new int [2][4];
 		ComplexNumber[] vect1 = new ComplexNumber[4];
 		
 		matr1[0][0] = num1;
@@ -274,10 +274,10 @@ class pruebas {
 		
 		ComplexNumber[] res = Library.accionVectorMatriz(matr1, vect1);
 		
-		assertEquals(22,res[0].getPartR());
-		assertEquals(-68,res[0].getPartI());
-		assertEquals(47,res[1].getPartR());
-		assertEquals(-21,res[1].getPartI());
+		assertEquals(2,res[0].getPartR());
+		assertEquals(-1,res[0].getPartI());
+		assertEquals(5,res[1].getPartR());
+		assertEquals(-1,res[1].getPartI());
 	}
 	
 	@Test 
@@ -549,5 +549,66 @@ class pruebas {
 		
 		boolean res = Library.esHermitiana(matr1);
 		assertTrue(res);
+	}
+	
+	@Test
+	public void deberiaSacarElEstadoEnTiempoT() {
+		int num1 = 0;
+		int num2 = 1;
+		int num3 = 0;
+		int num4 = 0;
+		int num5 = 1;
+		int num6 = 0;
+		int num7 = 0;
+		int num8 = 1;
+		int num9 = 1;
+		int num10 = 0;
+		int num11 = 1;
+		int num12 = 0;
+		int num13 = 0;
+		int num14 = 1;
+		int num15 = 1;
+		int num16 = 1;
+		
+		ComplexNumber num17 = new ComplexNumber(5,-1,'C');
+		ComplexNumber num18 = new ComplexNumber(2,-1,'C');
+		ComplexNumber num19 = new ComplexNumber(6,-4,'C');
+		ComplexNumber num20 = new ComplexNumber(2,5,'C');
+
+		int[][] matr1 = new int [4][4];
+		ComplexNumber[] vect1 = new ComplexNumber[4];
+		
+		matr1[0][0] = num1;
+		matr1[0][1] = num2;
+		matr1[0][2] = num3;
+		matr1[0][3] = num4;
+		matr1[1][0] = num5;
+		matr1[1][1] = num6;
+		matr1[1][2] = num7;
+		matr1[1][3] = num8;
+		matr1[2][0] = num9;
+		matr1[2][1] = num10;
+		matr1[2][2] = num11;
+		matr1[2][3] = num12;
+		matr1[3][0] = num13;
+		matr1[3][1] = num14;
+		matr1[3][2] = num15;
+		matr1[3][3] = num16;
+		
+		vect1[0] = num17;
+		vect1[1] = num18;
+		vect1[2] = num19;
+		vect1[3] = num20;
+		
+		ComplexNumber[] res = Library.canicasCoeficientesComplejos(matr1, vect1, 2);
+		
+		assertEquals(7,res[0].getPartR());
+		assertEquals(4,res[0].getPartI());
+		assertEquals(12,res[1].getPartR());
+		assertEquals(-1,res[1].getPartI());
+		assertEquals(13,res[2].getPartR());
+		assertEquals(-6,res[2].getPartI());
+		assertEquals(28,res[3].getPartR());
+		assertEquals(-1,res[3].getPartI());
 	}
 }
