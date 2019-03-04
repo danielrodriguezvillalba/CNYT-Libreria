@@ -219,16 +219,16 @@ public class Library {
 	
 	/**
 	 * Metodo que encuentra el estado siguiente dado un estado inicial
-	 * @param matr Matriz a ver su comportamiento
+	 * @param matrBool Matriz a ver su comportamiento
 	 * @param vect Estado inicial el cual inicia
 	 */
-	public static ComplexNumber[] accionVectorMatriz(int[][] matr, ComplexNumber[] vect) {
-		if (vect.length == matr[0].length) {
-			ComplexNumber[] resultado = new ComplexNumber[matr[0].length];
-	        for (int i = 0; i < matr.length; i++) {
+	public static ComplexNumber[] accionVectorMatriz(double[][] matrBool, ComplexNumber[] vect) {
+		if (vect.length == matrBool[0].length) {
+			ComplexNumber[] resultado = new ComplexNumber[matrBool[0].length];
+	        for (int i = 0; i < matrBool.length; i++) {
 	        	ComplexNumber temp = new ComplexNumber(0,0,'C');;
-	            for (int j = 0; j < matr[0].length; j++) {
-	            	ComplexNumber var = new ComplexNumber(matr[i][j],0,'C');
+	            for (int j = 0; j < matrBool[0].length; j++) {
+	            	ComplexNumber var = new ComplexNumber(matrBool[i][j],0,'C');
 	            	temp = suma(temp, producto(var, vect[j]));
 	            }
 	            resultado[i] = temp;
@@ -415,19 +415,19 @@ public class Library {
 	 * @param clicks Numero de clicks en los cuales se va a calcular su estado
 	 * @return Estado final de las canicas despues de n Clicks
 	 */
-	public static ComplexNumber[] canicasCoeficientesComplejos(int[][] matrBool,ComplexNumber[] initialState,int clicks ) {
+	public static ComplexNumber[] canicasCoeficientesComplejos(double[][] matrBool,ComplexNumber[] initialState,int clicks ) {
 		ComplexNumber[] res ;
-		if(esBooleana(matrBool)) {
+		//if(esBooleana(matrBool)) {
 			ComplexNumber[] temp = initialState;
 			for (int i = 0; i < clicks; i++) { 
 				res = accionVectorMatriz(matrBool, temp);
 				temp = res;
 			}
 			return temp;
-		}
-		else {
-			return null;
-		}
+		//}
+		//else {
+		//	return null;
+		//}
 	}
 	
 	/**
@@ -448,4 +448,5 @@ public class Library {
 		}
 		return bandera;
 	}
+	
 }

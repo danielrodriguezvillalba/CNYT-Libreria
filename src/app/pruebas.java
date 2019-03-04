@@ -255,7 +255,7 @@ class pruebas {
 		ComplexNumber num12 = new ComplexNumber(6,-4,'C');
 		ComplexNumber num13 = new ComplexNumber(0,0,'C');
 
-		int[][] matr1 = new int [2][4];
+		double[][] matr1 = new double [2][4];
 		ComplexNumber[] vect1 = new ComplexNumber[4];
 		
 		matr1[0][0] = num1;
@@ -575,7 +575,7 @@ class pruebas {
 		ComplexNumber num19 = new ComplexNumber(6,-4,'C');
 		ComplexNumber num20 = new ComplexNumber(2,5,'C');
 
-		int[][] matr1 = new int [4][4];
+		double[][] matr1 = new double [4][4];
 		ComplexNumber[] vect1 = new ComplexNumber[4];
 		
 		matr1[0][0] = num1;
