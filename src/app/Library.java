@@ -449,4 +449,43 @@ public class Library {
 		return bandera;
 	}
 	
+	/**
+	 * Metodo que simula el experimento de multiples rendijas
+	 * @param matr Matriz de probabilidades para que pase por dicho camino 
+	 * @param numClicks numero de clicks que se quiere hacer la simulacion
+	 * @param target Numero de objetivos a los cuales le daran las balas
+	 * @return Matriz de probabilidades resultante despues de el numero de clicks dados
+	 */
+	public static double[][] multiplesRendijas(double[][] matr,int numClicks,int target){
+		//if() {
+		double[][] temp = matr;
+		for (int i = 0; i < numClicks; i++) { 
+			temp = multiplicacionEntreMatricesDeProbabilidades(temp, matr);
+		}
+		return temp;
+	}
+	
+	/**
+	 * Metodo que multiplica dos matrices de probabilidades dadas
+	 * @param matr1 Matriz 1 a multiplicar 
+	 * @param matr2 Matriz 2 a multiplicar 
+	 * @return Matriz resultante de la multiplicacion de las dos dadas
+	 */
+	private static double[][] multiplicacionEntreMatricesDeProbabilidades(double[][] matr1,double[][] matr2){
+		double [][] resultado= new double [matr1.length][matr2[0].length];
+		if (matr1[0].length == matr2.length) {
+	        for (int i = 0; i < matr1.length; i++) {
+	            for (int j = 0; j < matr2[0].length; j++) {
+	                for (int k = 0; k < matr1[0].length; k++) {
+	                	if (resultado[i][j] == 0) {
+	                		double num = 0;
+	                		resultado[i][j] = num+(matr1[i][k]* matr2[k][j]);
+	                	}
+	                	else { resultado[i][j] = resultado[i][j]+(matr1[i][k]* matr2[k][j]);}
+	                }
+	            }
+	        }
+	    }
+		return resultado;
+	}
 }

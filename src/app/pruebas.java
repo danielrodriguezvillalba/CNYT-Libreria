@@ -611,4 +611,14 @@ class pruebas {
 		assertEquals(28,res[3].getPartR());
 		assertEquals(-1,res[3].getPartI());
 	}
+	
+	@Test
+	public void deberiaSimularExperimentoDeCanicas() {
+		
+	}
+	
+	@Test
+	public void deberiaSimularExperimentoDeMultiplesRendijas() {
+		
+	}
 }
