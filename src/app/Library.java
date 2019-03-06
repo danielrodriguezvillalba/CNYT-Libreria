@@ -241,6 +241,28 @@ public class Library {
 	}
 	
 	/**
+	 * Metodo que encuentra el estado siguiente dado un estado inicial
+	 * @param matrBool Matriz a ver su comportamiento
+	 * @param vect Estado inicial el cual inicia
+	 */
+	public static ComplexNumber[] accionVectorMatriz(ComplexNumber[][] matrBool, ComplexNumber[] vect) {
+		if (vect.length == matrBool[0].length) {
+			ComplexNumber[] resultado = new ComplexNumber[matrBool[0].length];
+	        for (int i = 0; i < matrBool.length; i++) {
+	        	ComplexNumber temp = new ComplexNumber(0,0,'C');;
+	            for (int j = 0; j < matrBool[0].length; j++) {
+	            	temp = suma(temp, producto(matrBool[i][j], vect[j]));
+	            }
+	            resultado[i] = temp;
+	        }
+	        return resultado;
+		}
+		else {
+			return null;
+		}
+	}
+	
+	/**
 	 * Metodo que calcula el producto interno de dos matrices 
 	 * @param vect1 vector 1 a multiplicar
 	 * @param vect2 vector 2 a multiplicar
@@ -454,15 +476,20 @@ public class Library {
 	 * @param matr Matriz de probabilidades para que pase por dicho camino 
 	 * @param numClicks numero de clicks que se quiere hacer la simulacion
 	 * @param target Numero de objetivos a los cuales le daran las balas
+	 * * @param state estado inicial de el experimento
 	 * @return Matriz de probabilidades resultante despues de el numero de clicks dados
 	 */
-	public static double[][] multiplesRendijas(double[][] matr,int numClicks,int target){
+	public static ComplexNumber[] multiplesRendijas(double[][] matr,int numClicks,int target,ComplexNumber[] state){
 		//if() {
 		double[][] temp = matr;
-		for (int i = 0; i < numClicks; i++) { 
+		for (int i = 0; i < target; i++) { 
 			temp = multiplicacionEntreMatricesDeProbabilidades(temp, matr);
 		}
-		return temp;
+		ComplexNumber[] result = state;
+		for (int i = 0; i < numClicks; i++) {
+			result = accionVectorMatriz(temp,result);
+		}
+		return result;
 	}
 	
 	/**
@@ -487,5 +514,25 @@ public class Library {
 	        }
 	    }
 		return resultado;
+	}
+	
+	/**
+	 * Metodo que simula el experimento de multiples rendijas con complejos
+	 * @param matr Matriz de probabilidades para que pase por dicho camino 
+	 * @param numClicks numero de clicks que se quiere hacer la simulacion
+	 * @param target Numero de objetivos a los cuales le daran las balas
+	 * @param state estado inicial de el experimento
+	 * @return Matriz de probabilidades resultante despues de el numero de clicks dados
+	 */
+	public static ComplexNumber[] multiplesRendijasComplejos(ComplexNumber[][] matr,int numClicks,int target,ComplexNumber[] state){
+		ComplexNumber[][] temp = matr;
+		for (int i = 0; i < target; i++) { 
+			temp = productoEntreMatrices(temp, matr);
+		}
+		ComplexNumber[] result = state;
+		for (int i = 0; i < numClicks; i++) {
+			result = accionVectorMatriz(temp,result);
+		}
+		return result;
 	}
 }

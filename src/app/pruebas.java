@@ -614,7 +614,47 @@ class pruebas {
 	
 	@Test
 	public void deberiaSimularExperimentoDeCanicas() {
+
+		double[][] matr1 = {{0,0,0,0,0,0,0,0},{0.5,0,0,0,0,0,0,0},{0.5,0,0,0,0,0,0,0},{0,0.33,0,1,0,0,0,0},{0,0.33,0,0,1,0,0,0},{0,0.33,0.33,0,0,1,0,0},{0,0,0.33,0,0,0,1,0},{0,0,0.33,0,0,0,0,1}};
 		
+		ComplexNumber num1 = new ComplexNumber(1,0,'C');
+		ComplexNumber num2 = new ComplexNumber(0,0,'C');
+		ComplexNumber num3 = new ComplexNumber(0,0,'C');
+		ComplexNumber num4 = new ComplexNumber(0,0,'C');
+		ComplexNumber num5 = new ComplexNumber(0,0,'C');
+		ComplexNumber num6 = new ComplexNumber(0,0,'C');
+		ComplexNumber num7 = new ComplexNumber(0,0,'C');
+		ComplexNumber num8 = new ComplexNumber(0,0,'C');
+		
+		ComplexNumber[] vect1 = new ComplexNumber[8];
+		
+		vect1[0] = num1;
+		vect1[1] = num2;
+		vect1[2] = num3;
+		vect1[3] = num4;
+		vect1[4] = num5;
+		vect1[5] = num6;
+		vect1[6] = num7;
+		vect1[7] = num8;
+		
+		ComplexNumber[] res = Library.multiplesRendijas(matr1, 1, 2, vect1);
+		
+		assertEquals(0,res[0].getPartR());
+		assertEquals(0,res[0].getPartI());
+		assertEquals(0,res[1].getPartR());
+		assertEquals(0,res[1].getPartI());
+		assertEquals(0,res[2].getPartR());
+		assertEquals(0,res[2].getPartI());
+		assertEquals(0.165,res[3].getPartR());
+		assertEquals(0,res[3].getPartI());
+		assertEquals(0.165,res[4].getPartR());
+		assertEquals(0,res[4].getPartI());
+		assertEquals(0.33,res[5].getPartR());
+		assertEquals(0,res[5].getPartI());
+		assertEquals(0.165,res[6].getPartR());
+		assertEquals(0,res[6].getPartI());
+		assertEquals(0.165,res[7].getPartR());
+		assertEquals(0,res[7].getPartI());
 	}
 	
 	@Test
