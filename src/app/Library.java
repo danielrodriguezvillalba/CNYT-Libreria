@@ -439,17 +439,12 @@ public class Library {
 	 */
 	public static ComplexNumber[] canicasCoeficientesComplejos(double[][] matrBool,ComplexNumber[] initialState,int clicks ) {
 		ComplexNumber[] res ;
-		//if(esBooleana(matrBool)) {
 			ComplexNumber[] temp = initialState;
 			for (int i = 0; i < clicks; i++) { 
 				res = accionVectorMatriz(matrBool, temp);
 				temp = res;
 			}
-			return temp;
-		//}
-		//else {
-		//	return null;
-		//}
+		return temp;
 	}
 	
 	/**
