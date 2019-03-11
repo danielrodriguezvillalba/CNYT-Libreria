@@ -6,7 +6,7 @@ public class ComplexNumber {
 	public ComplexNumber (double r , double i, char forma) {
 		parteR = r;
 		parteI = i;
-		modulo = Math.pow(Math.pow(parteI, 2) + Math.pow(parteR, 2),0.5);
+		modulo = Math.pow(Math.pow(parteI, 2) + (Math.pow(parteR, 2)),0.5);
 		this.forma = forma;
 	}
 	

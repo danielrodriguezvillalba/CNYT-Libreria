@@ -264,8 +264,8 @@ public class Library {
 	
 	/**
 	 * Metodo que calcula el producto interno de dos matrices 
-	 * @param vect1 vector 1 a multiplicar
-	 * @param vect2 vector 2 a multiplicar
+	 * @param vect1 matriz 1 a multiplicar
+	 * @param vect2 matriz 2 a multiplicar
 	 * @return Numero complejo el cual es el producto interno de los matrices
 	 */
 	public static ComplexNumber productoInterno(ComplexNumber[][] vect1 , ComplexNumber[][] vect2 ) {
@@ -284,18 +284,53 @@ public class Library {
 	}
 	
 	/**
+	 * Metodo que calcula el producto interno de dos matrices 
+	 * @param vect1 vector 1 a multiplicar
+	 * @param vect2 vector 2 a multiplicar
+	 * @return Numero complejo el cual es el producto interno de los matrices
+	 */
+	public static ComplexNumber productoInterno(ComplexNumber[] vect1 , ComplexNumber[] vect2 ) {
+		if(vect1.length == vect2.length) {
+			ComplexNumber acum = new ComplexNumber(0,0,'C');
+	        for (int i = 0; i < vect1.length; i++) {
+	        		acum = suma(acum, producto(vect1[i], vect2[i]));
+	        }
+	        return acum;
+		}
+		else {
+			return null;
+		}
+	}
+	
+	/**
 	 * Metodo que Retorna la norma de un vector de complejos
 	 * @param vect Vector de complejos a sacar su norma
 	 * @return Norma del vector dado
 	 */
-	public static ComplexNumber normaMatriz(ComplexNumber[][] vect) {
+	public static double normaMatriz(ComplexNumber[][] vect) {
 		if (vect.length != 0) {
 			ComplexNumber norma = productoInterno(vect, vect) ;
-			ComplexNumber res = new ComplexNumber (Math.pow(norma.getPartR(),0.5),Math.pow(norma.getPartI(),0.5),'C');
+			double res = Math.pow(norma.getPartR(),0.5);
 			return res;
 		}
 		else {
-			return null;
+			return 0;
+		}
+	}
+	
+	/**
+	 * Metodo que Retorna la norma de un vector de complejos
+	 * @param vect Vector de complejos a sacar su norma
+	 * @return Norma del vector dado
+	 */
+	public static double normaVector(ComplexNumber[] vect) {
+		if (vect.length != 0) {
+			ComplexNumber res = productoInterno(vect, vect);
+			double norm = Math.pow(res.getPartR(),0.5);
+			return norm;
+		}
+		else {
+			return 0;
 		}
 	}
 	
@@ -305,14 +340,14 @@ public class Library {
 	 * @param vect2 matriz 2 a sacar la distancia
 	 * @return Complejo que indica la distancia entre las matrices
 	 */
-	public static ComplexNumber distancia(ComplexNumber[][] vect1,ComplexNumber[][] vect2) {
+	public static double distancia(ComplexNumber[][] vect1,ComplexNumber[][] vect2) {
 		if(vect1.length == vect2.length) {
 			ComplexNumber[][] resta = restaMatrices(vect1, vect2);
-			ComplexNumber inner = normaMatriz(resta);
+			double inner = normaMatriz(resta);
 			return inner;
 		}
 		else {
-			return null;
+			return 0;
 		}
 	}
 	
@@ -529,5 +564,19 @@ public class Library {
 			result = accionVectorMatriz(temp,result);
 		}
 		return result;
+	}
+	
+	/**
+	 * Metodo que calcula la probabilidad de que una particula se encuentre en la posicion dada
+	 * @param cantPosiciones Cantidad de posiciones que va a tener el ket dado
+	 * @param posicion Posicion en la cual se calculara la probabilidad de la particula
+	 * @param ket Estado inicial de la particula
+	 * @return
+	 */
+	public static double calcularProbabilidadDeParticulaEnUnaPosicionDeSistemaCuantico(int cantPosiciones, int posicion, ComplexNumber[] ket){
+		double norm =normaVector(ket);
+		double prob = Math.pow(ket[posicion].modulo(),2)/Math.pow(norm,2);
+		System.out.println(ket[posicion].modulo());
+		return prob;
 	}
 }
