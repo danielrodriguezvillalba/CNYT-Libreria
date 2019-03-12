@@ -325,8 +325,12 @@ public class Library {
 	 */
 	public static double normaVector(ComplexNumber[] vect) {
 		if (vect.length != 0) {
-			ComplexNumber res = productoInterno(vect, vect);
-			double norm = Math.pow(res.getPartR(),0.5);
+			double res = 0;
+			for (int i=0; i<vect.length;i++) {
+				res += Math.pow(vect[i].getPartR(),2);
+				res += Math.pow(vect[i].getPartI(),2);
+			}
+			double norm = Math.pow(res,0.5);
 			return norm;
 		}
 		else {
@@ -571,12 +575,40 @@ public class Library {
 	 * @param cantPosiciones Cantidad de posiciones que va a tener el ket dado
 	 * @param posicion Posicion en la cual se calculara la probabilidad de la particula
 	 * @param ket Estado inicial de la particula
-	 * @return
+	 * @return Probabilidad de que la particula este en la posicion dada
 	 */
 	public static double calcularProbabilidadDeParticulaEnUnaPosicionDeSistemaCuantico(int cantPosiciones, int posicion, ComplexNumber[] ket){
-		double norm =normaVector(ket);
-		double prob = Math.pow(ket[posicion].modulo(),2)/Math.pow(norm,2);
-		System.out.println(ket[posicion].modulo());
+		double[] todasProba =calcularProbabilidadDeParticulaEnCadaPosicion(cantPosiciones,ket);
+		double prob = todasProba[posicion];
 		return prob;
 	}
+	
+	/**
+	 * Metodo que calcula la las probabilidades de cada posicion del ket
+	 * @param numPosiciones numero de posiciones que tiene el ket
+	 * @param ket Estado inicial de la particula
+	 * @return arreglo de probabilidades de un ket
+	 */
+	public static double[] calcularProbabilidadDeParticulaEnCadaPosicion(int numPosiciones, ComplexNumber[] ket) {
+		double norm = normaVector(ket);
+		double[] prob = new double[ket.length];
+		for(int i=0; i<ket.length; i++) {
+			prob[i] = Math.pow(ket[i].modulo(),2)/Math.pow(norm,2);
+		}
+		return prob;
+		
+	}
+	
+	public static ComplexNumber calcularDistanciaEntreKets(ComplexNumber[] ket1,ComplexNumber[] ket2) {
+		if(ket1.length == ket2.length) {
+			double norm1 = normaVector(ket1);
+			double norm2 = normaVector(ket2);
+			ComplexNumber amplit = productoInterno(ket1, ket2);
+			double producNorm = norm1*norm2;
+			ComplexNumber res = new ComplexNumber((amplit.getPartR()/producNorm),(amplit.getPartI()/producNorm),'C');
+			return res;
+		}
+		else {return null;}
+	}
+	
 }

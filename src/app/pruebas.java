@@ -707,6 +707,27 @@ class pruebas {
 		
 		double res = Library.calcularProbabilidadDeParticulaEnUnaPosicionDeSistemaCuantico(4, 2, vect1);
 		
-		assertEquals(0.052624,res);
+		assertEquals(0.05263157894736841,res);
+	}
+	
+	@Test
+	public void deberiaSacarDistanciaEntreKets() {
+		ComplexNumber num1 = new ComplexNumber(0,-1,'C');
+		ComplexNumber num2 = new ComplexNumber(1,0,'C');
+		ComplexNumber num3 = new ComplexNumber(1,0,'C');
+		ComplexNumber num4 = new ComplexNumber(0,-1,'C');
+		
+		ComplexNumber[] vect1 = new ComplexNumber[2];
+		ComplexNumber[] vect2 = new ComplexNumber[2];
+		
+		vect1[0] = num1;
+		vect1[1]= num2;
+		vect2[0]= num3;
+		vect2[1]= num4;
+		
+		ComplexNumber res = Library.calcularDistanciaEntreKets(vect1, vect2);
+		
+		assertEquals(0,res.getPartR());
+		assertEquals(-0.9999999999999998,res.getPartI());
 	}
 }
