@@ -599,6 +599,12 @@ public class Library {
 		
 	}
 	
+	/**
+	 * Metodo que calcula la distancia entre dos kets dados
+	 * @param ket1 Primer ket a medir su distancia
+	 * @param ket2 Segundo ket al cual se le va a medir la distancia respecto al 1
+	 * @return Numero complejo resultante de la distancia de los dos kets dados
+	 */
 	public static ComplexNumber calcularDistanciaEntreKets(ComplexNumber[] ket1,ComplexNumber[] ket2) {
 		if(ket1.length == ket2.length) {
 			double norm1 = normaVector(ket1);
@@ -611,4 +617,13 @@ public class Library {
 		else {return null;}
 	}
 	
+	public static ComplexNumber calcular(ComplexNumber[][] matr, ComplexNumber[] ket) {
+		if(matr.length == matr[1].length) {
+			if(esHermitiana(matr)) {
+				
+			}
+			else {return null;}
+		}
+		else {return null;}
+	}
 }
