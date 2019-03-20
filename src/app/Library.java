@@ -190,6 +190,7 @@ public class Library {
 		else return null;
 	}
 	
+	
 	/**
 	 * Metodo que multiplica dos matrices dadas
 	 * @param matr1 Matriz 1 a multiplicar 
@@ -212,6 +213,23 @@ public class Library {
 		            }
 		        }
 		    }
+			return resultado;
+		}
+		else return null;
+	}
+	
+	/**
+	 * Metodo que multiplica dos vectores dadas
+	 * @param vect1 Vector 1 a multiplicar 
+	 * @param vect2 Vector 2 a multiplicar
+	 * @return Matriz resultante de la multiplicacion de las dos dadas, null si no se pueden multiplicar
+	 */
+	public static ComplexNumber[] productoEntreVectores(ComplexNumber[] vect1, ComplexNumber[] vect2){
+		if(vect1.length == vect2.length) {
+			ComplexNumber [] resultado= new ComplexNumber [vect1.length];
+		        for (int i = 0; i < vect1.length; i++) {
+		            resultado[i] = producto(vect1[i], vect2[i]);
+		       }	
 			return resultado;
 		}
 		else return null;
@@ -620,10 +638,24 @@ public class Library {
 	public static ComplexNumber calcular(ComplexNumber[][] matr, ComplexNumber[] ket) {
 		if(matr.length == matr[1].length) {
 			if(esHermitiana(matr)) {
-				
+				return null;
 			}
 			else {return null;}
 		}
 		else {return null;}
+	}
+	
+	public static ComplexNumber calcularElValorEsperado(ComplexNumber[][] matr, ComplexNumber[] vect) {
+		ComplexNumber[] res = accionVectorMatriz(matr, vect);
+		res = productoEntreVectores(res, vect);
+		ComplexNumber suma = new ComplexNumber(0,0,'C');
+		for(int i = 0; i<res.length;i++ ) {
+			suma = suma(suma, producto(res[i],vect[i]));
+			System.out.println(suma.getPartR());
+			System.out.println(suma.getPartI());
+		}
+		System.out.println("ASDaSD" + suma.getPartR());
+		System.out.println("ASDaSD" + suma.getPartI());
+		return suma;
 	}
 }

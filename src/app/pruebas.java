@@ -730,4 +730,31 @@ class pruebas {
 		assertEquals(0,res.getPartR());
 		assertEquals(-0.9999999999999998,res.getPartI());
 	}
+	
+	@Test
+	public void deberiaSacarLaMedia() {
+		ComplexNumber num1 = new ComplexNumber(1,0,'C');
+		ComplexNumber num2 = new ComplexNumber(0,-1,'C');
+		ComplexNumber num3 = new ComplexNumber(0,1,'C');
+		ComplexNumber num4 = new ComplexNumber(2,0,'C');
+		
+		ComplexNumber num5 = new ComplexNumber(0.70710678118,0,'C');
+		ComplexNumber num6 = new ComplexNumber(0,0.70710678118,'C');
+		//(3/2)*(0.70710678118)
+		ComplexNumber[][] matr1 = new ComplexNumber[2][2];
+		ComplexNumber[] vect1 = new ComplexNumber[2];
+		
+		matr1[0][0] = num1;
+		matr1[0][1]= num2;
+		matr1[1][0] = num3;
+		matr1[1][1] = num4;
+		
+		vect1[0] = num5;
+		vect1[1] = num6;
+		
+		ComplexNumber res = Library.calcularElValorEsperado(matr1, vect1);
+		
+		assertEquals(0.25,res.getPartR());
+		assertEquals(0,res.getPartI());
+	}
 }
