@@ -131,6 +131,27 @@ public class Library {
 			return null;
 		}
 	}
+	
+	/**
+	 * Metodo que resta dos vectores de complejos
+	 * @param vector1 vector 1 a ser restado
+	 * @param vector2 vector 2 a ser restado
+	 * @return vector resultante de la resta de dos vectores dados
+	 */
+	public static ComplexNumber[] restaVectores(ComplexNumber[] vect1 ,ComplexNumber[]vect2 ) {
+		if(vect1.length == vect2.length) {
+			ComplexNumber[] resultado = new ComplexNumber [vect1.length];
+			for (int c = 0; c<vect1.length ; c++) {
+					ComplexNumber res = resta(vect1[c],vect2[c]);
+					resultado[c] = res;
+			}
+			return resultado;
+		}
+		else {
+			return null;
+		}
+	}
+	
 	/**
 	 * Metodo que retorna el inverso de una matriz
 	 * @param matr Matriz de complejos el cual se va a sacar el inverso
@@ -288,10 +309,11 @@ public class Library {
 	 */
 	public static ComplexNumber productoInterno(ComplexNumber[][] vect1 , ComplexNumber[][] vect2 ) {
 		if(vect1.length == vect2.length && vect1[0].length == vect2[0].length) {
+			ComplexNumber[][] conjugado1 = conjugada(vect1);
 			ComplexNumber acum = new ComplexNumber(0,0,'C');
 	        for (int i = 0; i < vect1.length; i++) {
 	        	for (int j = 0;j  < vect1[0].length; j++) {
-	        		acum = suma(acum, producto(vect1[i][j], vect2[i][j]));
+	        		acum = suma(acum, producto(conjugado1[i][j], vect2[i][j]));
 	        	}
 	        }
 	        return acum;
@@ -302,6 +324,18 @@ public class Library {
 	}
 	
 	/**
+	 * Metodo que retorna el conjugado de un vector
+	 * @param vector Vector a operar
+	 * @return Vector conjugado del dado
+	 */
+	public static ComplexNumber[] conjugadoVector(ComplexNumber[] vector) {
+		ComplexNumber[] conjugado = new ComplexNumber[vector.length];
+		for (int i = 0; i < vector.length; i++) {
+			conjugado[i] = conjugado(vector[i]);
+		}
+		return conjugado;
+	}
+	/**
 	 * Metodo que calcula el producto interno de dos matrices 
 	 * @param vect1 vector 1 a multiplicar
 	 * @param vect2 vector 2 a multiplicar
@@ -309,9 +343,10 @@ public class Library {
 	 */
 	public static ComplexNumber productoInterno(ComplexNumber[] vect1 , ComplexNumber[] vect2 ) {
 		if(vect1.length == vect2.length) {
+			ComplexNumber[] conjugado1 = conjugadoVector(vect1);
 			ComplexNumber acum = new ComplexNumber(0,0,'C');
 	        for (int i = 0; i < vect1.length; i++) {
-	        		acum = suma(acum, producto(vect1[i], vect2[i]));
+	        		acum = suma(acum, producto(conjugado1[i], vect2[i]));
 	        }
 	        return acum;
 		}
@@ -623,39 +658,67 @@ public class Library {
 	 * @param ket2 Segundo ket al cual se le va a medir la distancia respecto al 1
 	 * @return Numero complejo resultante de la distancia de los dos kets dados
 	 */
-	public static ComplexNumber calcularDistanciaEntreKets(ComplexNumber[] ket1,ComplexNumber[] ket2) {
+	public static double calcularDistanciaEntreKets(ComplexNumber[] ket1,ComplexNumber[] ket2) {
 		if(ket1.length == ket2.length) {
-			double norm1 = normaVector(ket1);
-			double norm2 = normaVector(ket2);
-			ComplexNumber amplit = productoInterno(ket1, ket2);
-			double producNorm = norm1*norm2;
-			ComplexNumber res = new ComplexNumber((amplit.getPartR()/producNorm),(amplit.getPartI()/producNorm),'C');
-			return res;
+			ComplexNumber[] resta = restaVectores(ket1, ket2);
+			ComplexNumber amplit = productoInterno(resta, resta);
+			double distancia =  Math.pow(amplit.getPartR(),0.5);
+			return distancia;
 		}
-		else {return null;}
+		else {return 0;}
 	}
 	
-	public static ComplexNumber calcular(ComplexNumber[][] matr, ComplexNumber[] ket) {
-		if(matr.length == matr[1].length) {
-			if(esHermitiana(matr)) {
-				return null;
+	/**
+	 * Metodo que calcula la media de una matriz  y un vector
+	 * @param matr Matriz hermitiana dada 
+	 * @param ket Ket dado para hallar la media 
+	 * @return Numero complejo el cual indica la media entre la matriz y el vector dado
+	 */
+	public static ComplexNumber calcularLaMedia(ComplexNumber[][] matr, ComplexNumber[] ket) {
+		if(esHermitiana(matr)) {
+			ComplexNumber[] res = accionVectorMatriz(matr, ket);
+			ComplexNumber media = productoInterno(res, ket);
+			return media;
+		}
+		else return null;
+	}
+	
+	/**
+	 * Metodo que retorna la varianza de un observable y un ket
+	 * @param observable Observable dado para hacer el calculo
+	 * @param ket ket dado para hacer el calculo
+	 * @return Varianza calculada entre el observable y el ket
+	 */
+	public static ComplexNumber calcularVarianza(ComplexNumber[][] observable, ComplexNumber[] ket) {
+		if(esHermitiana(observable)) {
+			ComplexNumber media = calcularLaMedia(observable, ket);
+			ComplexNumber[][] identidad = productoEscalar(observable, media);
+			ComplexNumber[][] temp1 = sumaMatrices(observable,inverso(identidad));
+			ComplexNumber[][] temp2 = productoEntreMatrices(temp1, temp1);
+			ComplexNumber varianza = calcularLaMedia(temp2, ket);
+			return varianza;
+		}
+		else return null;
+	}
+	
+	/**
+	 * Metodo que calcula la matriz identidad de una dada
+	 * @param matriz Matriz a calcular su identidad
+	 * @return Matriz identidad de la dada
+	 */
+	public static ComplexNumber[][] calcularMatrizIdentidad(ComplexNumber[][] matriz) {
+		ComplexNumber[][] identidad = new ComplexNumber[matriz.length][matriz.length];
+		if(matriz[0].length == matriz.length) {
+			for(int i = 0; i<identidad.length; i++) {
+				for(int j = 0; j<identidad.length; j++) {
+					if(i==j) identidad[i][j] = new ComplexNumber(1,0,'C');
+					else identidad[i][j] = new ComplexNumber(0,0,'C');
+				}
+				
 			}
-			else {return null;}
+			return identidad;
 		}
-		else {return null;}
+		else return null;
 	}
 	
-	public static ComplexNumber calcularElValorEsperado(ComplexNumber[][] matr, ComplexNumber[] vect) {
-		ComplexNumber[] res = accionVectorMatriz(matr, vect);
-		res = productoEntreVectores(res, vect);
-		ComplexNumber suma = new ComplexNumber(0,0,'C');
-		for(int i = 0; i<res.length;i++ ) {
-			suma = suma(suma, producto(res[i],vect[i]));
-			System.out.println(suma.getPartR());
-			System.out.println(suma.getPartI());
-		}
-		System.out.println("ASDaSD" + suma.getPartR());
-		System.out.println("ASDaSD" + suma.getPartI());
-		return suma;
-	}
 }

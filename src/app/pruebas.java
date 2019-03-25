@@ -282,33 +282,20 @@ class pruebas {
 	
 	@Test 
 	public void deberiaCalcularElProductoInterno() {
-		ComplexNumber num1 = new ComplexNumber(4,3,'C');
-		ComplexNumber num2 = new ComplexNumber(6,-4,'C');
-		ComplexNumber num3 = new ComplexNumber(12,-7,'C');
-		ComplexNumber num4 = new ComplexNumber(0,13,'C');
+		ComplexNumber c1 = new ComplexNumber(3, 2,'C');
+		ComplexNumber c2 = new ComplexNumber(0, 0,'C');
+		ComplexNumber c3 = new ComplexNumber(5, -6,'C');
+		ComplexNumber c4 = new ComplexNumber(1, 0,'C');
+		ComplexNumber c5 = new ComplexNumber(4, 2,'C');
+		ComplexNumber c6 = new ComplexNumber(0, 1,'C');
 		
-		ComplexNumber num10 = new ComplexNumber(4,3,'C');
-		ComplexNumber num11 = new ComplexNumber(6,-4,'C');
-		ComplexNumber num12 = new ComplexNumber(12,-7,'C');
-		ComplexNumber num13 = new ComplexNumber(0,13,'C');
+		ComplexNumber[] v1 = new ComplexNumber[] { c1, c2, c3 };
+		ComplexNumber[] v2 = new ComplexNumber[] { c4, c5, c6 };
 		
-		ComplexNumber[][] vect1 = new ComplexNumber[4][1];
-		ComplexNumber[][] vect2 = new ComplexNumber[4][1];
-		
-		vect1[0][0] = num1;
-		vect1[1][0] = num2;
-		vect1[2][0] = num3;
-		vect1[3][0] = num4;
-		
-		vect2[0][0] = num10;
-		vect2[1][0] = num11;
-		vect2[2][0] = num12;
-		vect2[3][0] = num13;
-		
-		ComplexNumber res = Library.productoInterno(vect1, vect2);
-		
-		assertEquals(-47,res.getPartR());
-		assertEquals(-192,res.getPartI());
+		ComplexNumber respuesta = Library.productoInterno(v1, v2);
+		ComplexNumber esperado = new ComplexNumber(-3,3,'C');
+		assertTrue(respuesta.equals(esperado));	
+
 	}
 	
 	@Test
@@ -327,7 +314,7 @@ class pruebas {
 		
 		double res = Library.normaMatriz(vect1);
 		
-		assertEquals(Math.pow(-47,0.5),res);
+		assertEquals(20.952326839756964,res);
 		
 	}
 	
@@ -358,7 +345,7 @@ class pruebas {
 		
 		double res = Library.distancia(vect1, vect2);
 		
-		assertEquals(Math.pow(128,0.5),res);
+		assertEquals(25.41653005427767,res);
 		
 	}
 	
@@ -712,49 +699,50 @@ class pruebas {
 	
 	@Test
 	public void deberiaSacarDistanciaEntreKets() {
-		ComplexNumber num1 = new ComplexNumber(0,-1,'C');
-		ComplexNumber num2 = new ComplexNumber(1,0,'C');
-		ComplexNumber num3 = new ComplexNumber(1,0,'C');
-		ComplexNumber num4 = new ComplexNumber(0,-1,'C');
+		ComplexNumber c1 = new ComplexNumber(3, 2,'C');
+		ComplexNumber c2 = new ComplexNumber(0, 0,'C');
+		ComplexNumber c3 = new ComplexNumber(5, -6,'C');
+		ComplexNumber c4 = new ComplexNumber(1, 0,'C');
+		ComplexNumber c5 = new ComplexNumber(4, 2,'C');
+		ComplexNumber c6 = new ComplexNumber(0, 1,'C');
 		
-		ComplexNumber[] vect1 = new ComplexNumber[2];
-		ComplexNumber[] vect2 = new ComplexNumber[2];
+		ComplexNumber[] k1 = new ComplexNumber[] { c1, c2, c3 };
+		ComplexNumber[] k2 = new ComplexNumber[] { c4, c5, c6 };
 		
-		vect1[0] = num1;
-		vect1[1]= num2;
-		vect2[0]= num3;
-		vect2[1]= num4;
+		double res = Library.calcularDistanciaEntreKets(k1, k2);
 		
-		ComplexNumber res = Library.calcularDistanciaEntreKets(vect1, vect2);
-		
-		assertEquals(0,res.getPartR());
-		assertEquals(-0.9999999999999998,res.getPartI());
+		assertEquals(Math.sqrt(102),res);
 	}
 	
 	@Test
 	public void deberiaSacarLaMedia() {
-		ComplexNumber num1 = new ComplexNumber(1,0,'C');
-		ComplexNumber num2 = new ComplexNumber(0,-1,'C');
-		ComplexNumber num3 = new ComplexNumber(0,1,'C');
-		ComplexNumber num4 = new ComplexNumber(2,0,'C');
+		ComplexNumber[] vect1 = {new ComplexNumber(1,0,'C'), new ComplexNumber(0,-1,'C')};
+		ComplexNumber[] vect2 = {new ComplexNumber(0,1,'C'), new ComplexNumber(2,0,'C')};
 		
-		ComplexNumber num5 = new ComplexNumber(0.70710678118,0,'C');
-		ComplexNumber num6 = new ComplexNumber(0,0.70710678118,'C');
-		//(3/2)*(0.70710678118)
-		ComplexNumber[][] matr1 = new ComplexNumber[2][2];
-		ComplexNumber[] vect1 = new ComplexNumber[2];
+		ComplexNumber[][] obs1 = {vect1,vect2};
 		
-		matr1[0][0] = num1;
-		matr1[0][1]= num2;
-		matr1[1][0] = num3;
-		matr1[1][1] = num4;
+		ComplexNumber[] ket1 = {new ComplexNumber(Math.sqrt(2)/2,0,'C'), new ComplexNumber(0,Math.sqrt(2)/2,'C')};
 		
-		vect1[0] = num5;
-		vect1[1] = num6;
+		ComplexNumber valorMedioEsperado = new ComplexNumber(2.5,0,'C');
 		
-		ComplexNumber res = Library.calcularElValorEsperado(matr1, vect1);
+		ComplexNumber valorMedioRta = Library.calcularLaMedia(obs1, ket1);
 		
-		assertEquals(0.25,res.getPartR());
-		assertEquals(0,res.getPartI());
+		assertEquals(2.5000000000000004,valorMedioRta.getPartR());
+		assertEquals(valorMedioEsperado.getPartI(),valorMedioRta.getPartI());
+	}
+	
+	@Test
+	public void testDeberiaCalcularLaVarianza() {
+		ComplexNumber[] v1 = {new ComplexNumber(1,0,'C'), new ComplexNumber(0,-1,'C')};
+		ComplexNumber[] v2 = {new ComplexNumber(0,1,'C'), new ComplexNumber(2,0,'C')};
+		
+		ComplexNumber[][] observable = {v1,v2};
+		
+		ComplexNumber[] ket = {new ComplexNumber(Math.sqrt(2)/2,0,'C'), new ComplexNumber(0,Math.sqrt(2)/2,'C')};
+		
+		ComplexNumber res = Library.calcularVarianza(observable, ket);
+		
+		assertEquals(res.getPartR(),0.25);
+		assertEquals(res.getPartI(),0);
 	}
 }
