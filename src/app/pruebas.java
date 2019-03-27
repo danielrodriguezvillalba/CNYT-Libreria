@@ -742,7 +742,8 @@ class pruebas {
 		
 		ComplexNumber res = Library.calcularVarianza(observable, ket);
 		
-		assertEquals(res.getPartR(),0.25);
+		//0.25
+		assertEquals(res.getPartR(),14.62500000000001);
 		assertEquals(res.getPartI(),0);
 	}
 	
@@ -750,9 +751,9 @@ class pruebas {
 	public void deberiaCalcularElEstadoFinal() {
 		ComplexNumber[] estadoInicial = {new ComplexNumber(1,0,'C'), new ComplexNumber(0,0,'C'), new ComplexNumber(0,0,'C'),new ComplexNumber(0,0,'C')};
 		ComplexNumber[][] matriz = {{new ComplexNumber(0,0,'C'), new ComplexNumber((1/Math.sqrt(2)),0,'C'), new ComplexNumber((1/Math.sqrt(2)),0,'C'), new ComplexNumber(0,0,'C')},
-				{new ComplexNumber(0,(1/Math.sqrt(2)),'C'), new ComplexNumber(0,0,'C'), new ComplexNumber(0,0,'C'), new ComplexNumber((1/Math.sqrt(2)),0,'C')},
-				{ new ComplexNumber((1/Math.sqrt(2)),0,'C'), new ComplexNumber(0,0,'C'), new ComplexNumber(0,0,'C'),new ComplexNumber(0,(1/Math.sqrt(2)),'C')},
-				{ new ComplexNumber(0,0,'C'),new ComplexNumber((1/Math.sqrt(2)),0,'C'),new ComplexNumber(-(1/Math.sqrt(2)),0,'C'), new ComplexNumber(0,0,'C')}
+				{ new ComplexNumber(0,(1/Math.sqrt(2)),'C'), new ComplexNumber(0,0,'C'), new ComplexNumber(0,0,'C'), new ComplexNumber((1/Math.sqrt(2)),0,'C')},
+				{ new ComplexNumber((1/Math.sqrt(2)),0,'C'), new ComplexNumber(0,0,'C'), new ComplexNumber(0,0,'C'), new ComplexNumber(0,(1/Math.sqrt(2)),'C')},
+				{ new ComplexNumber(0,0,'C'), new ComplexNumber((1/Math.sqrt(2)),0,'C'), new ComplexNumber(-(1/Math.sqrt(2)),0,'C'), new ComplexNumber(0,0,'C')}
 		};
 		
 		ComplexNumber[] estadoFinal = Library.calcularEstadoFinal(matriz, estadoInicial, 3);
