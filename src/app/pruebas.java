@@ -732,7 +732,7 @@ class pruebas {
 	}
 	
 	@Test
-	public void testDeberiaCalcularLaVarianza() {
+	public void deberiaCalcularLaVarianza() {
 		ComplexNumber[] v1 = {new ComplexNumber(1,0,'C'), new ComplexNumber(0,-1,'C')};
 		ComplexNumber[] v2 = {new ComplexNumber(0,1,'C'), new ComplexNumber(2,0,'C')};
 		
@@ -744,5 +744,26 @@ class pruebas {
 		
 		assertEquals(res.getPartR(),0.25);
 		assertEquals(res.getPartI(),0);
+	}
+	
+	@Test
+	public void deberiaCalcularElEstadoFinal() {
+		ComplexNumber[] estadoInicial = {new ComplexNumber(1,0,'C'), new ComplexNumber(0,0,'C'), new ComplexNumber(0,0,'C'),new ComplexNumber(0,0,'C')};
+		ComplexNumber[][] matriz = {{new ComplexNumber(0,0,'C'), new ComplexNumber((1/Math.sqrt(2)),0,'C'), new ComplexNumber((1/Math.sqrt(2)),0,'C'), new ComplexNumber(0,0,'C')},
+				{new ComplexNumber(0,(1/Math.sqrt(2)),'C'), new ComplexNumber(0,0,'C'), new ComplexNumber(0,0,'C'), new ComplexNumber((1/Math.sqrt(2)),0,'C')},
+				{ new ComplexNumber((1/Math.sqrt(2)),0,'C'), new ComplexNumber(0,0,'C'), new ComplexNumber(0,0,'C'),new ComplexNumber(0,(1/Math.sqrt(2)),'C')},
+				{ new ComplexNumber(0,0,'C'),new ComplexNumber((1/Math.sqrt(2)),0,'C'),new ComplexNumber(-(1/Math.sqrt(2)),0,'C'), new ComplexNumber(0,0,'C')}
+		};
+		
+		ComplexNumber[] estadoFinal = Library.calcularEstadoFinal(matriz, estadoInicial, 3);
+		
+		assertEquals(estadoFinal[0].getPartR(),0);
+		assertEquals(estadoFinal[0].getPartI(),0);
+		assertEquals(estadoFinal[1].getPartR(),-0.7071067811865474);
+		assertEquals(estadoFinal[1].getPartI(),0.7071067811865474);
+		assertEquals(estadoFinal[2].getPartR(),0);
+		assertEquals(estadoFinal[2].getPartI(),0);
+		assertEquals(estadoFinal[3].getPartR(),0);
+		assertEquals(estadoFinal[3].getPartI(),0);
 	}
 }

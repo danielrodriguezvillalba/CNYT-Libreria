@@ -38,6 +38,10 @@ En este repositorio encontrara una libreria desarrollada en Java, cuyo objetivo 
 
 * Calcular la probabilidad de encontrarlo en una posición en particular.
 * Buscar la probabilidad de transitar entre kets.
+* Sistema de la posición de la partícula en una recta.
+* Calcular la media y la varianza del observable en el estado dado.
+* Calcular los valores propios del observable y la probabilidad de que el sistema transite a alguno de los vectores propios después de la observación.
+* Calcular el estado final a partir de un estado inicial.
 
 ## Requisitos ðŸ“‹
 

@@ -721,4 +721,19 @@ public class Library {
 		else return null;
 	}
 	
+	/**
+	 * Metodo que calcula el estado final dado un estado inicial, su respectiva matriz y el numero de clicks
+	 * @param matriz Matriz de probabilidad de la particula
+	 * @param inicial Estado inicial en el que se encuentra la particula
+	 * @param clicks Numero de clicks en que se quiere saber el estado final
+	 * @return Estado final de la particula
+	 */
+	public static ComplexNumber[] calcularEstadoFinal(ComplexNumber[][] matriz,ComplexNumber[] inicial, int clicks) {
+		ComplexNumber[] temp = inicial;
+		for (int i = 0; i < clicks; i++) { 
+			temp = accionVectorMatriz(matriz, temp);
+		}
+		return temp;
+	}
+	
 }
